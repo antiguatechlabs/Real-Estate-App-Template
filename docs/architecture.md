@@ -55,6 +55,12 @@ types/
 docs/
 ```
 
+## App segments
+
+- `app/page.tsx` es la landing pública (`/`) compartida con espacios para información general.
+- `app/app/page.tsx` monta la aplicación principal del cliente bajo la ruta `/app`.
+- `app/api/bff/route.ts` contiene los endpoints del BFF que hablan con el backend Laravel antes de exponer datos al cliente.
+
 ## Folder responsibilities
 
 ### `app/`

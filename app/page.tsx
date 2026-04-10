@@ -11,6 +11,24 @@ const stack = [
   "react-calendar"
 ];
 
+const areas = [
+  {
+    title: "Landing pública",
+    path: "/",
+    detail: "Espacio marketing para presentar la plataforma y redirigir a cada cliente al área que corresponda."
+  },
+  {
+    title: "Aplicación principal",
+    path: "/app",
+    detail: "Concentra las vistas operativas del cliente (propiedades, clientes, calendarios, reportes)."
+  },
+  {
+    title: "BFF compartido",
+    path: "/api/bff",
+    detail: "Provee autenticación, cache y adaptadores entre Laravel y los clientes Next.js."
+  }
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 px-6 py-16 text-slate-50">
@@ -40,6 +58,19 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        <section className="grid gap-4 pt-8 sm:grid-cols-2">
+          {areas.map(({ title, path, detail }) => (
+            <article
+              key={title}
+              className="rounded-2xl border border-slate-700/80 bg-slate-950/80 p-5 text-slate-200 shadow-xl shadow-black/60"
+            >
+              <p className="text-sm uppercase tracking-wide text-slate-400">{path}</p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">{title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">{detail}</p>
+            </article>
+          ))}
+        </section>
       </section>
     </main>
   );
