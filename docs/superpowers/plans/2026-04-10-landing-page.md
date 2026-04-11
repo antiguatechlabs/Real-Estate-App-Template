@@ -1,4 +1,53 @@
-import Link from "next/link";
+# Landing Page Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Replace `app/page.tsx` with a 10-section production-quality real estate landing page template.
+
+**Architecture:** Single Server Component file (`app/page.tsx`). All sections defined as internal functions at the top of the file and composed in the default export. No client state, no new dependencies — pure Tailwind + inline SVGs.
+
+**Tech Stack:** Next.js 16 App Router, React 19, Tailwind CSS v4, TypeScript. No new npm packages.
+
+---
+
+## File Map
+
+| File | Action | Purpose |
+|------|--------|---------|
+| `app/page.tsx` | Full replacement | All 10 sections: Navbar, Hero, Stats, Properties, HowItWorks, Categories, Testimonials, Agents, CTA, Footer |
+| `app/globals.css` | No change | Existing dark background + scroll-behavior kept as-is |
+
+---
+
+## Design Tokens (use these exact classes throughout)
+
+```
+Background:      bg-slate-950
+Card surface:    bg-white/5 backdrop-blur-md border border-white/[0.08]
+Primary accent:  sky-500  (#0ea5e9)
+Accent hover:    sky-400
+Secondary:       blue-600
+Muted text:      text-slate-400
+Body text:       text-slate-300
+Heading:         text-white
+Border:          border-white/[0.08]
+Radius-card:     rounded-2xl
+Radius-input:    rounded-xl
+Shadow:          shadow-2xl shadow-black/50
+Transition:      transition-all duration-300
+```
+
+---
+
+### Task 1: Scaffold the file with data + section stubs
+
+**Files:**
+- Modify: `app/page.tsx` (full replacement)
+
+- [ ] **Step 1: Replace the entire file** with scaffolding that defines all placeholder data arrays and stub section functions, then composes them in the default export.
+
+```tsx
+// app/page.tsx
 
 /* ─── Placeholder data ──────────────────────────────────────── */
 
@@ -75,34 +124,6 @@ const CATEGORIES = [
   { label: "Land & Lots", count: "980+ listings", color: "from-violet-900/40 to-slate-900" },
 ];
 
-const CATEGORY_ICONS = [
-  /* Residential — house */
-  <svg key="house" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-    <polyline points="9 22 9 12 15 12 15 22" />
-  </svg>,
-  /* Commercial — building */
-  <svg key="building" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <rect x="4" y="2" width="16" height="20" rx="2" />
-    <line x1="9" y1="7" x2="9" y2="7.01" />
-    <line x1="15" y1="7" x2="15" y2="7.01" />
-    <line x1="9" y1="12" x2="9" y2="12.01" />
-    <line x1="15" y1="12" x2="15" y2="12.01" />
-    <line x1="9" y1="17" x2="9" y2="17.01" />
-    <line x1="15" y1="17" x2="15" y2="17.01" />
-  </svg>,
-  /* Luxury — star */
-  <svg key="star" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-  </svg>,
-  /* Land — map */
-  <svg key="map" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6" />
-    <line x1="9" y1="3" x2="9" y2="18" />
-    <line x1="15" y1="6" x2="15" y2="21" />
-  </svg>,
-];
-
 const TESTIMONIALS = [
   {
     quote:
@@ -133,26 +154,104 @@ const AGENTS = [
   { name: "Tom Nguyen", specialty: "First-Time Buyers", listings: 57, initials: "TN" },
 ];
 
-const FOOTER_LINKS = {
-  Company: ["About Us", "Careers", "Press", "Contact"],
-  Properties: ["For Sale", "For Rent", "Commercial", "Luxury"],
-  Resources: ["Blog", "Market Reports", "Mortgage Calculator", "Help Center"],
-};
-
 /* ─── Section components ────────────────────────────────────── */
 
+function Navbar() {
+  return <nav>NAVBAR</nav>;
+}
+
+function Hero() {
+  return <section>HERO</section>;
+}
+
+function Stats() {
+  return <section>STATS</section>;
+}
+
+function FeaturedProperties() {
+  return <section>PROPERTIES</section>;
+}
+
+function HowItWorks() {
+  return <section>HOW IT WORKS</section>;
+}
+
+function PropertyCategories() {
+  return <section>CATEGORIES</section>;
+}
+
+function Testimonials() {
+  return <section>TESTIMONIALS</section>;
+}
+
+function FeaturedAgents() {
+  return <section>AGENTS</section>;
+}
+
+function CTABanner() {
+  return <section>CTA</section>;
+}
+
+function Footer() {
+  return <footer>FOOTER</footer>;
+}
+
+/* ─── Page ──────────────────────────────────────────────────── */
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-x-hidden">
+      <Navbar />
+      <Hero />
+      <Stats />
+      <FeaturedProperties />
+      <HowItWorks />
+      <PropertyCategories />
+      <Testimonials />
+      <FeaturedAgents />
+      <CTABanner />
+      <Footer />
+    </main>
+  );
+}
+```
+
+- [ ] **Step 2: Verify the file compiles**
+
+```bash
+cd /Users/ign/Desktop/Projects/ATL/Real-Estate-App-Template && pnpm typecheck 2>&1 | tail -5
+```
+
+Expected: no errors (stubs return valid JSX).
+
+- [ ] **Step 3: Commit scaffold**
+
+```bash
+git add app/page.tsx && git commit -m "feat: scaffold landing page with data and section stubs"
+```
+
+---
+
+### Task 2: Implement Navbar
+
+**Files:**
+- Modify: `app/page.tsx` — replace `Navbar` stub
+
+- [ ] **Step 1: Replace the Navbar stub**
+
+```tsx
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 backdrop-blur-md border-b border-white/[0.06] bg-slate-950/80">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-2">
+      <a href="/" className="flex items-center gap-2">
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M8 1L1 6v9h5v-5h4v5h5V6L8 1z" fill="white" />
           </svg>
         </div>
         <span className="font-semibold text-white text-lg tracking-tight">[Agency Name]</span>
-      </Link>
+      </a>
 
       {/* Desktop nav links */}
       <ul className="hidden md:flex items-center gap-8">
@@ -186,15 +285,38 @@ function Navbar() {
     </nav>
   );
 }
+```
 
+- [ ] **Step 2: Verify typecheck passes**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Navbar section"
+```
+
+---
+
+### Task 3: Implement Hero
+
+**Files:**
+- Modify: `app/page.tsx` — replace `Hero` stub
+
+- [ ] **Step 1: Replace the Hero stub**
+
+```tsx
 function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 overflow-hidden">
       {/* Layered background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/95 to-slate-950" />
-      {/* Faux property atmosphere */}
+      {/* Faux property image: deep gradient suggesting architecture */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(14,165,233,0.12),transparent_60%),radial-gradient(ellipse_at_70%_60%,rgba(37,99,235,0.10),transparent_60%)]" />
-      {/* Subtle grid texture */}
+      {/* Grid texture overlay */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -208,7 +330,7 @@ function Hero() {
         {/* Eyebrow */}
         <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-1.5 text-sm font-medium text-sky-300">
           <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-          [City]&rsquo;s Most Trusted Real Estate Platform
+          [City] &rsquo;s Most Trusted Real Estate Platform
         </span>
 
         {/* Headline */}
@@ -232,18 +354,7 @@ function Hero() {
           <div className="flex flex-col sm:flex-row gap-3 bg-white/[0.06] backdrop-blur-md border border-white/[0.10] rounded-2xl p-2">
             {/* Location */}
             <div className="flex-1 flex items-center gap-2 bg-white/[0.06] rounded-xl px-4 py-3">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-slate-400 shrink-0"
-                aria-hidden="true"
-              >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 shrink-0" aria-hidden="true">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
@@ -276,19 +387,9 @@ function Hero() {
               <option value="3">3+</option>
               <option value="4">4+</option>
             </select>
-            {/* Search */}
+            {/* Search button */}
             <button className="bg-sky-500 hover:bg-sky-400 text-white font-medium px-6 py-3 rounded-xl transition-all duration-200 flex items-center gap-2 shrink-0 cursor-pointer">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
               </svg>
@@ -303,22 +404,37 @@ function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-600 animate-bounce">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          aria-hidden="true"
-        >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="m19 9-7 7-7-7" />
         </svg>
       </div>
     </section>
   );
 }
+```
 
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Hero section with search bar"
+```
+
+---
+
+### Task 4: Implement Stats Strip
+
+**Files:**
+- Modify: `app/page.tsx` — replace `Stats` stub
+
+- [ ] **Step 1: Replace the Stats stub**
+
+```tsx
 function Stats() {
   return (
     <section className="border-y border-white/[0.06] bg-slate-900/50">
@@ -338,12 +454,35 @@ function Stats() {
     </section>
   );
 }
+```
 
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Stats strip"
+```
+
+---
+
+### Task 5: Implement Featured Properties
+
+**Files:**
+- Modify: `app/page.tsx` — replace `FeaturedProperties` stub
+
+- [ ] **Step 1: Replace the FeaturedProperties stub**
+
+```tsx
 function FeaturedProperties() {
   return (
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
+        {/* Section header */}
         <div className="flex items-end justify-between mb-10">
           <div>
             <p className="text-sm font-medium text-sky-400 mb-2 uppercase tracking-widest">
@@ -358,17 +497,7 @@ function FeaturedProperties() {
             className="hidden sm:flex items-center gap-1 text-sm text-slate-400 hover:text-sky-400 transition-colors duration-200"
           >
             View all listings
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
@@ -385,10 +514,12 @@ function FeaturedProperties() {
               <div
                 className={`h-52 bg-gradient-to-br ${p.gradient} relative flex items-end p-4`}
               >
+                {/* Price badge */}
                 <span className="bg-sky-500 text-white text-sm font-semibold px-3 py-1 rounded-lg">
                   {p.price}
                 </span>
-                <span className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-slate-200 text-xs px-2.5 py-1 rounded-full border border-white/10">
+                {/* Type badge */}
+                <span className="absolute top-4 right-4 bg-black/40 backdrop-blur text-slate-200 text-xs px-2.5 py-1 rounded-full border border-white/10">
                   {p.type}
                 </span>
               </div>
@@ -430,7 +561,30 @@ function FeaturedProperties() {
     </section>
   );
 }
+```
 
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Featured Properties section"
+```
+
+---
+
+### Task 6: Implement How It Works
+
+**Files:**
+- Modify: `app/page.tsx` — replace `HowItWorks` stub
+
+- [ ] **Step 1: Replace the HowItWorks stub**
+
+```tsx
 function HowItWorks() {
   return (
     <section className="py-20 px-6 bg-slate-900/30">
@@ -446,6 +600,7 @@ function HowItWorks() {
 
           {STEPS.map((step) => (
             <div key={step.number} className="flex flex-col items-center text-center gap-4 relative">
+              {/* Number circle */}
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-sky-950/50 z-10">
                 {step.number}
               </div>
@@ -458,6 +613,58 @@ function HowItWorks() {
     </section>
   );
 }
+```
+
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement How It Works section"
+```
+
+---
+
+### Task 7: Implement Property Categories
+
+**Files:**
+- Modify: `app/page.tsx` — replace `PropertyCategories` stub
+
+- [ ] **Step 1: Replace the PropertyCategories stub**
+
+```tsx
+/* SVG icons for each category — index-matched to CATEGORIES array */
+const CATEGORY_ICONS = [
+  /* Residential — house */
+  <svg key="house" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
+  </svg>,
+  /* Commercial — building */
+  <svg key="building" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="4" y="2" width="16" height="20" rx="2" />
+    <line x1="9" y1="7" x2="9" y2="7.01" />
+    <line x1="15" y1="7" x2="15" y2="7.01" />
+    <line x1="9" y1="12" x2="9" y2="12.01" />
+    <line x1="15" y1="12" x2="15" y2="12.01" />
+    <line x1="9" y1="17" x2="9" y2="17.01" />
+    <line x1="15" y1="17" x2="15" y2="17.01" />
+  </svg>,
+  /* Luxury — star */
+  <svg key="star" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>,
+  /* Land — map-pin */
+  <svg key="map" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6" />
+    <line x1="9" y1="3" x2="9" y2="18" />
+    <line x1="15" y1="6" x2="15" y2="21" />
+  </svg>,
+];
 
 function PropertyCategories() {
   return (
@@ -475,6 +682,7 @@ function PropertyCategories() {
               href="#"
               className={`group relative flex flex-col items-center justify-center gap-4 rounded-2xl border border-white/[0.08] bg-gradient-to-br ${cat.color} p-8 text-center hover:border-sky-500/40 hover:scale-[1.02] transition-all duration-300 cursor-pointer overflow-hidden`}
             >
+              {/* Glow on hover */}
               <div className="absolute inset-0 bg-sky-500/0 group-hover:bg-sky-500/5 transition-all duration-300 rounded-2xl" />
               <div className="relative z-10 text-sky-300 group-hover:text-sky-200 transition-colors duration-200">
                 {CATEGORY_ICONS[i]}
@@ -490,7 +698,30 @@ function PropertyCategories() {
     </section>
   );
 }
+```
 
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Property Categories section"
+```
+
+---
+
+### Task 8: Implement Testimonials
+
+**Files:**
+- Modify: `app/page.tsx` — replace `Testimonials` stub
+
+- [ ] **Step 1: Replace the Testimonials stub**
+
+```tsx
 function Testimonials() {
   return (
     <section className="py-20 px-6 bg-slate-900/30">
@@ -515,8 +746,10 @@ function Testimonials() {
                 ))}
               </div>
 
+              {/* Quote */}
               <p className="text-slate-300 text-sm leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
 
+              {/* Author */}
               <div className="flex items-center gap-3 pt-2 border-t border-white/[0.06]">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-sky-600 to-blue-700 flex items-center justify-center text-white text-sm font-semibold shrink-0">
                   {t.initials}
@@ -533,7 +766,30 @@ function Testimonials() {
     </section>
   );
 }
+```
 
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Testimonials section"
+```
+
+---
+
+### Task 9: Implement Featured Agents
+
+**Files:**
+- Modify: `app/page.tsx` — replace `FeaturedAgents` stub
+
+- [ ] **Step 1: Replace the FeaturedAgents stub**
+
+```tsx
 function FeaturedAgents() {
   return (
     <section className="py-20 px-6">
@@ -552,6 +808,7 @@ function FeaturedAgents() {
               key={agent.name}
               className="flex flex-col items-center text-center gap-4 rounded-2xl bg-white/[0.04] border border-white/[0.08] p-8 hover:border-sky-500/20 hover:-translate-y-1 transition-all duration-300"
             >
+              {/* Avatar */}
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-sky-500 to-blue-700 flex items-center justify-center text-white text-2xl font-bold ring-4 ring-sky-500/20">
                 {agent.initials}
               </div>
@@ -572,10 +829,34 @@ function FeaturedAgents() {
     </section>
   );
 }
+```
 
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Featured Agents section"
+```
+
+---
+
+### Task 10: Implement CTA Banner
+
+**Files:**
+- Modify: `app/page.tsx` — replace `CTABanner` stub
+
+- [ ] **Step 1: Replace the CTABanner stub**
+
+```tsx
 function CTABanner() {
   return (
     <section className="py-24 px-6 relative overflow-hidden">
+      {/* Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.15),transparent_70%)]" />
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/60 to-slate-950" />
 
@@ -591,6 +872,7 @@ function CTABanner() {
           find the right property at the right price.
         </p>
 
+        {/* Email capture */}
         <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mt-8">
           <input
             type="email"
@@ -607,13 +889,42 @@ function CTABanner() {
     </section>
   );
 }
+```
+
+- [ ] **Step 2: Typecheck**
+
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement CTA Banner section"
+```
+
+---
+
+### Task 11: Implement Footer
+
+**Files:**
+- Modify: `app/page.tsx` — replace `Footer` stub
+
+- [ ] **Step 1: Replace the Footer stub**
+
+```tsx
+const FOOTER_LINKS = {
+  Company: ["About Us", "Careers", "Press", "Contact"],
+  Properties: ["For Sale", "For Rent", "Commercial", "Luxury"],
+  Resources: ["Blog", "Market Reports", "Mortgage Calculator", "Help Center"],
+};
 
 function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-slate-950 px-6 py-16">
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 mb-12">
-          {/* Brand */}
+          {/* Brand column */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
@@ -626,6 +937,7 @@ function Footer() {
             <p className="text-sm text-slate-500 leading-relaxed">
               [City]&rsquo;s premier real estate platform. Buy, sell, or rent with confidence.
             </p>
+            {/* Social icons */}
             <div className="flex gap-3">
               {/* Twitter/X */}
               <a href="#" aria-label="Twitter" className="w-9 h-9 rounded-lg bg-white/[0.06] hover:bg-white/[0.10] border border-white/[0.08] flex items-center justify-center transition-colors duration-200">
@@ -681,22 +993,60 @@ function Footer() {
     </footer>
   );
 }
+```
 
-/* ─── Page ──────────────────────────────────────────────────── */
+- [ ] **Step 2: Typecheck**
 
-export default function Home() {
-  return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <Stats />
-      <FeaturedProperties />
-      <HowItWorks />
-      <PropertyCategories />
-      <Testimonials />
-      <FeaturedAgents />
-      <CTABanner />
-      <Footer />
-    </main>
-  );
-}
+```bash
+pnpm typecheck 2>&1 | tail -5
+```
+
+- [ ] **Step 3: Final commit**
+
+```bash
+git add app/page.tsx && git commit -m "feat: implement Footer — landing page complete"
+```
+
+---
+
+### Task 12: Final verification
+
+- [ ] **Step 1: Full typecheck**
+
+```bash
+pnpm typecheck 2>&1
+```
+
+Expected: no errors.
+
+- [ ] **Step 2: Lint**
+
+```bash
+pnpm lint 2>&1 | tail -20
+```
+
+Fix any issues reported. Common ones: `no-unused-vars` (remove unused imports), `react/no-unescaped-entities` (use `&rsquo;` etc. — already done in plan).
+
+- [ ] **Step 3: Start dev server and do a visual pass**
+
+```bash
+pnpm dev
+```
+
+Open http://localhost:3000 and verify:
+- Navbar is fixed and visible on scroll
+- Hero fills the viewport with gradient background + search bar
+- Stats strip shows 4 columns on desktop, 2×2 on mobile
+- 3 property cards render with gradient image placeholders
+- How It Works has 3 numbered steps with a connecting line on desktop
+- 4 category tiles in a 2×2 grid (mobile) / 4-column (desktop)
+- 3 testimonial cards with star ratings
+- 3 agent cards with avatar circles
+- CTA banner has email input + button
+- Footer has 4 columns with social icons and bottom bar
+
+- [ ] **Step 4: Commit final**
+
+```bash
+git add -A && git commit -m "feat: real estate landing page template complete"
+```
