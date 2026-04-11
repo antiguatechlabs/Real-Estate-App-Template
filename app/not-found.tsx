@@ -1,6 +1,9 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
+
+import { defaultLocale } from '@/i18n/locale';
 
 function GlitchText({ text }: { text: string }) {
     return (
@@ -24,6 +27,8 @@ function GlitchText({ text }: { text: string }) {
 }
 
 export default function NotFoundwithGlitchyText() {
+    const router = useRouter();
+
     return (
         <div className='min-h-screen w-full bg-zinc-50 dark:bg-zinc-950 flex flex-col items-center justify-center overflow-hidden transition-colors duration-500'>
             <div className='flex flex-col items-center text-center px-6 max-w-2xl mx-auto'>
@@ -99,6 +104,9 @@ export default function NotFoundwithGlitchyText() {
                     className='flex flex-col sm:flex-row gap-3'
                 >
                     <motion.button
+                        onClick={() => {
+                            router.push(`/${defaultLocale}`);
+                        }}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.97 }}
                         className='inline-flex items-center gap-2 rounded-none border border-zinc-900 bg-zinc-900 px-6 py-2.5 text-sm font-mono font-semibold text-zinc-50 transition-colors hover:bg-zinc-800 dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-zinc-200'
@@ -122,7 +130,9 @@ export default function NotFoundwithGlitchyText() {
                     </motion.button>
 
                     <motion.button
-                        onClick={() => {/* push to home */ }}
+                        onClick={() => {
+                            router.back();
+                        }}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.97 }}
                         className='inline-flex items-center gap-2 rounded-none border border-zinc-300 bg-transparent px-6 py-2.5 text-sm font-mono font-semibold text-zinc-700 transition-colors hover:border-zinc-500 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-400 dark:hover:text-zinc-100'

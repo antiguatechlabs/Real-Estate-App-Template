@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "title": "{agencyName} | Real estate in {city}",
+    "description": "Explore the starter landing page for {agencyName} in {city}. Showcase listings, trusted agents, and a clear call to action in one polished public page."
+  },
+  "navbar": {
+    "links": {
+      "buy": "Buy",
+      "rent": "Rent",
+      "sell": "Sell",
+      "agents": "Agents"
+    },
+    "signIn": "Sign in",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "eyebrow": "{city}''s Most Trusted Real Estate Platform",
+    "titleStart": "Find Your Perfect",
+    "titleAccent": "Property",
+    "titleEnd": "in {city}",
+    "description": "Thousands of listings, from homes and apartments to commercial spaces and premium investments, all in one place.",
+    "locationPlaceholder": "Enter city, neighborhood, or ZIP",
+    "filters": {
+      "propertyTypeLabel": "Property type",
+      "propertyTypePlaceholder": "Property Type",
+      "propertyTypeSale": "For Sale",
+      "propertyTypeRent": "For Rent",
+      "propertyTypeCommercial": "Commercial",
+      "bedsLabel": "Bedrooms",
+      "bedsPlaceholder": "Beds"
+    },
+    "search": "Search",
+    "popularLabel": "Popular:"
+  },
+  "stats": {
+    "items": {
+      "propertiesListed": "Properties Listed",
+      "citiesCovered": "Cities Covered",
+      "satisfiedClients": "Satisfied Clients",
+      "averageRating": "Average Rating"
+    }
+  },
+  "featuredProperties": {
+    "eyebrow": "Handpicked for you",
+    "title": "Featured Properties",
+    "viewAll": "View all listings",
+    "types": {
+      "singleFamily": "Single Family",
+      "apartment": "Apartment",
+      "luxury": "Luxury"
+    },
+    "beds": "{count} beds",
+    "baths": "{count} baths",
+    "sqft": "{count} sqft",
+    "viewDetails": "View Details"
+  },
+  "howItWorks": {
+    "eyebrow": "Simple process",
+    "title": "How It Works",
+    "steps": {
+      "search": {
+        "title": "Search Properties",
+        "description": "Browse listings by location, price, and category until you find the right fit for your goals."
+      },
+      "visit": {
+        "title": "Schedule a Visit",
+        "description": "Book in-person or virtual tours directly from the listing and get confirmation from the team quickly."
+      },
+      "deal": {
+        "title": "Close the Deal",
+        "description": "Move forward with expert support through negotiations, paperwork, and every final step."
+      }
+    }
+  },
+  "propertyCategories": {
+    "eyebrow": "Browse by type",
+    "title": "Property Categories",
+    "items": {
+      "residential": {
+        "label": "Residential",
+        "count": "8,200+ listings"
+      },
+      "commercial": {
+        "label": "Commercial",
+        "count": "1,340+ listings"
+      },
+      "luxury": {
+        "label": "Luxury",
+        "count": "620+ listings"
+      },
+      "land": {
+        "label": "Land & Lots",
+        "count": "980+ listings"
+      }
+    }
+  },
+  "testimonials": {
+    "eyebrow": "What clients say",
+    "title": "Trusted by Thousands",
+    "ratingLabel": "5 out of 5 stars",
+    "quotes": {
+      "sarah": "Found our dream home in under two weeks. The platform made it easy to filter options and schedule tours without hassle.",
+      "marcus": "As an investor, I needed reliable data and fast listings. This platform delivered both and helped me close three deals in one quarter.",
+      "priya": "The rental search was smooth from start to finish. I found a great apartment and signed digitally the same day."
+    },
+    "roles": {
+      "homeBuyer": "Home Buyer",
+      "investor": "Real Estate Investor",
+      "renter": "Renter"
+    }
+  },
+  "agents": {
+    "eyebrow": "Expert team",
+    "title": "Meet Our Agents",
+    "description": "Our licensed agents bring local expertise and clear guidance to every transaction.",
+    "specialties": {
+      "luxuryResidential": "Luxury Residential",
+      "commercialProperties": "Commercial Properties",
+      "firstTimeBuyers": "First-Time Buyers"
+    },
+    "activeListings": "{count} active listings",
+    "contactAgent": "Contact Agent"
+  },
+  "cta": {
+    "titleStart": "Ready to Find Your",
+    "titleAccent": "Next Home?",
+    "description": "Join buyers, renters, and investors who trust {agencyName} to help them move with confidence.",
+    "emailPlaceholder": "Enter your email",
+    "emailLabel": "Email address",
+    "button": "Get Started",
+    "disclaimer": "No spam. Unsubscribe anytime."
+  },
+  "footer": {
+    "description": "{city}''s trusted real estate landing. Buy, sell, or rent with confidence.",
+    "social": {
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    },
+    "groups": {
+      "company": {
+        "title": "Company",
+        "links": {
+          "about": "About Us",
+          "careers": "Careers",
+          "press": "Press",
+          "contact": "Contact"
+        }
+      },
+      "properties": {
+        "title": "Properties",
+        "links": {
+          "forSale": "For Sale",
+          "forRent": "For Rent",
+          "commercial": "Commercial",
+          "luxury": "Luxury"
+        }
+      },
+      "resources": {
+        "title": "Resources",
+        "links": {
+          "blog": "Blog",
+          "marketReports": "Market Reports",
+          "mortgageCalculator": "Mortgage Calculator",
+          "helpCenter": "Help Center"
+        }
+      }
+    },
+    "copyright": "© {year} {agencyName}. All rights reserved.",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookies"
+    }
+  },
+  "notFound": {
+    "eyebrow": "Error / Page not found",
+    "title": "This page does not exist",
+    "description": "The page you are looking for was moved, renamed, or was never published on this public landing.",
+    "home": "Go to home",
+    "browseProperties": "Browse properties",
+    "footer": "HTTP 404 — We could not find what you were looking for"
+  }
+}
