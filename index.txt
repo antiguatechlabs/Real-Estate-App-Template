@@ -1,0 +1,17 @@
+1:"$Sreact.fragment"
+4:I[484,[],"OutletBoundary"]
+5:"$Sreact.suspense"
+7:I[484,[],"ViewportBoundary"]
+9:I[484,[],"MetadataBoundary"]
+b:I[7123,[],"default",1]
+:HL["/Real-Estate-App-Template/_next/static/css/faf0b5f13124572e.css","style"]
+0:{"P":null,"c":["",""],"q":"","i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Real-Estate-App-Template/_next/static/css/faf0b5f13124572e.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$L2"]}],{"children":[["$","$1","c",{"children":["$L3",null,["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],{},null,false,null]},null,false,null],["$","$1","h",{"children":[null,["$","$L7",null,{"children":"$L8"}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$La"}]}]}],null]}],false]],"m":"$undefined","G":["$b",[]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"6H1QnS4TzUJ66SWyC7Z0N"}
+3:E{"digest":"NEXT_REDIRECT;replace;/es;307;"}
+c:I[9520,["730","static/chunks/730-94fe64cd0ba3b42b.js","177","static/chunks/app/layout-160037360806f71c.js"],"Providers"]
+d:I[7121,[],""]
+e:I[4581,[],""]
+f:I[9267,["342","static/chunks/342-d2f2180fc910fff0.js","345","static/chunks/app/not-found-9cc6366c6d0a0f0a.js"],"default"]
+2:["$","html",null,{"lang":"es","suppressHydrationWarning":true,"children":["$","body",null,{"children":["$","$Lc",null,{"children":["$","$Ld",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Le",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","$Lf",null,{}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]}]
+8:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+6:null
+a:[["$","title","0",{"children":"Real Estate App Template"}],["$","meta","1",{"name":"description","content":"Base project with Next.js 16, TypeScript, Tailwind and React Query."}]]

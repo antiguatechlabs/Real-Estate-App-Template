@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[9520,["730","static/chunks/730-94fe64cd0ba3b42b.js","177","static/chunks/app/layout-160037360806f71c.js"],"Providers"]
+3:I[7121,[],""]
+4:I[4581,[],""]
+5:I[9267,["342","static/chunks/342-d2f2180fc910fff0.js","345","static/chunks/app/not-found-9cc6366c6d0a0f0a.js"],"default"]
+:HL["/Real-Estate-App-Template/_next/static/css/faf0b5f13124572e.css","style"]
+0:{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/Real-Estate-App-Template/_next/static/css/faf0b5f13124572e.css","precedence":"next"}]],["$","html",null,{"lang":"es","suppressHydrationWarning":true,"children":["$","body",null,{"children":["$","$L2",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}],"notFound":[["$","$L5",null,{}],[]]}]}]}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"6H1QnS4TzUJ66SWyC7Z0N"}
