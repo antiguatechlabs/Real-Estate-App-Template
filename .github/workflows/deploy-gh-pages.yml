@@ -27,7 +27,6 @@ jobs:
       - name: Export static site
         env:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
-          NEXT_PRIVATE_TURBOPACK: 0
         run: npm run export
 
       - name: Deploy to GitHub Pages

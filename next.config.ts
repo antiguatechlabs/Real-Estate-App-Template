@@ -12,19 +12,22 @@ function normalizeBasePath(value?: string) {
 
 const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
 const inferredBasePath = repoName ? `/${repoName}` : "";
-
-const basePath =
-  normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH) || inferredBasePath;
-
-const hasBasePath = basePath.length > 0;
+const exportBasePath = normalizeBasePath(
+  process.env.NEXT_PUBLIC_BASE_PATH ?? inferredBasePath,
+);
+const hasBasePath = exportBasePath.length > 0;
+const isExportMode = process.env.NEXT_EXPORT === "1";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  output: "export",
-  basePath,
-  assetPrefix: hasBasePath ? basePath : undefined,
-  trailingSlash: true,
 };
+
+if (isExportMode) {
+  nextConfig.output = "export";
+  nextConfig.basePath = exportBasePath;
+  nextConfig.assetPrefix = hasBasePath ? exportBasePath : undefined;
+  nextConfig.trailingSlash = true;
+}
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
