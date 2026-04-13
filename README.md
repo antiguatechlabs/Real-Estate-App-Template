@@ -36,6 +36,14 @@ Esta plantilla reúne los cimientos para piezas digitales del ecosistema inmobil
 - `npm run start`
 - `npm run lint`
 - `npm run typecheck`
+- `npm run export`
+
+## Despliegue en GitHub Pages
+
+- El sitio se exporta como HTML estático gracias a `output: "export"` en `next.config.ts`. El script `npm run export` ejecuta el build y copia el contenido de `.next/output/export` a `out/`; el `basePath` se deriva de `NEXT_PUBLIC_BASE_PATH` o del nombre del repositorio cuando despliegas al branch `gh-pages`.
+- Para pruebas locales copia el nombre del repositorio y pásalo como `NEXT_PUBLIC_BASE_PATH` antes de correr la exportación (por ejemplo `NEXT_PUBLIC_BASE_PATH=/real-estate-app-template npm run export`). Si estás desplegando a tu página personal (`<username>.github.io`) deja `NEXT_PUBLIC_BASE_PATH` vacío o no lo definas.
+- GitHub Actions ejecuta `.github/workflows/deploy-gh-pages.yml` en cada `push` sobre `main`. El flujo instala dependencias (`npm ci`), ejecuta `npm run export` con `NEXT_PUBLIC_BASE_PATH=/<repo>` y publica `out/` con `peaceiris/actions-gh-pages@v4`. El resultado se sirve desde la rama `gh-pages`.
+- Si necesitas un dominio personalizado o una rama desplegada diferente, ajusta la variable `NEXT_PUBLIC_BASE_PATH` (y el `basePath` en `next.config.ts` si haces cambios manuales) antes de volver a exportar.
 
 ## Recursos y documentación
 - [docs/context.md](docs/context.md)
