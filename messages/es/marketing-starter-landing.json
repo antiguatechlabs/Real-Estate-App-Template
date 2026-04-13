@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "title": "{agencyName} | Bienes raíces en {city}",
+    "description": "Explora la landing starter de {agencyName} en {city}. Muestra propiedades, asesores y un llamado a la acción claro en una sola página pública."
+  },
+  "navbar": {
+    "links": {
+      "buy": "Comprar",
+      "rent": "Rentar",
+      "sell": "Vender",
+      "agents": "Asesores"
+    },
+    "signIn": "Ingresar",
+    "getStarted": "Comenzar"
+  },
+  "hero": {
+    "eyebrow": "La plataforma inmobiliaria de mayor confianza en {city}",
+    "titleStart": "Encuentra tu",
+    "titleAccent": "propiedad",
+    "titleEnd": "ideal en {city}",
+    "description": "Miles de propiedades, desde casas y apartamentos hasta espacios comerciales e inversiones premium, en un solo lugar.",
+    "locationPlaceholder": "Ingresa ciudad, zona o código postal",
+    "filters": {
+      "propertyTypeLabel": "Tipo de propiedad",
+      "propertyTypePlaceholder": "Tipo de propiedad",
+      "propertyTypeSale": "En venta",
+      "propertyTypeRent": "En renta",
+      "propertyTypeCommercial": "Comercial",
+      "bedsLabel": "Habitaciones",
+      "bedsPlaceholder": "Habitaciones"
+    },
+    "search": "Buscar",
+    "popularLabel": "Populares:"
+  },
+  "stats": {
+    "items": {
+      "propertiesListed": "Propiedades publicadas",
+      "citiesCovered": "Ciudades cubiertas",
+      "satisfiedClients": "Clientes satisfechos",
+      "averageRating": "Calificación promedio"
+    }
+  },
+  "featuredProperties": {
+    "eyebrow": "Seleccionadas para ti",
+    "title": "Propiedades destacadas",
+    "viewAll": "Ver todas las propiedades",
+    "types": {
+      "singleFamily": "Casa familiar",
+      "apartment": "Apartamento",
+      "luxury": "Lujo"
+    },
+    "beds": "{count} hab.",
+    "baths": "{count} baños",
+    "sqft": "{count} sqft",
+    "viewDetails": "Ver detalles"
+  },
+  "howItWorks": {
+    "eyebrow": "Proceso simple",
+    "title": "Cómo funciona",
+    "steps": {
+      "search": {
+        "title": "Busca propiedades",
+        "description": "Explora propiedades por ubicación, precio y categoría hasta encontrar la opción ideal para tus objetivos."
+      },
+      "visit": {
+        "title": "Agenda una visita",
+        "description": "Reserva recorridos presenciales o virtuales directamente desde la publicación y recibe confirmación del equipo rápidamente."
+      },
+      "deal": {
+        "title": "Cierra el trato",
+        "description": "Avanza con apoyo experto en negociación, papelería y cada paso final del proceso."
+      }
+    }
+  },
+  "propertyCategories": {
+    "eyebrow": "Explora por tipo",
+    "title": "Categorías de propiedades",
+    "items": {
+      "residential": {
+        "label": "Residencial",
+        "count": "8,200+ propiedades"
+      },
+      "commercial": {
+        "label": "Comercial",
+        "count": "1,340+ propiedades"
+      },
+      "luxury": {
+        "label": "Lujo",
+        "count": "620+ propiedades"
+      },
+      "land": {
+        "label": "Terrenos",
+        "count": "980+ propiedades"
+      }
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Lo que dicen nuestros clientes",
+    "title": "La confianza de miles",
+    "ratingLabel": "5 de 5 estrellas",
+    "quotes": {
+      "sarah": "Encontramos la casa de nuestros sueños en menos de dos semanas. La plataforma hizo muy fácil filtrar opciones y agendar visitas sin complicaciones.",
+      "marcus": "Como inversionista, necesitaba datos confiables y listados rápidos. Esta plataforma me dio ambos y me ayudó a cerrar tres negocios en un trimestre.",
+      "priya": "La búsqueda de renta fue fluida de inicio a fin. Encontré un gran apartamento y firmé digitalmente el mismo día."
+    },
+    "roles": {
+      "homeBuyer": "Compradora de vivienda",
+      "investor": "Inversionista inmobiliario",
+      "renter": "Arrendataria"
+    }
+  },
+  "agents": {
+    "eyebrow": "Equipo experto",
+    "title": "Conoce a nuestros asesores",
+    "description": "Nuestros asesores certificados aportan conocimiento local y una guía clara en cada negociación.",
+    "specialties": {
+      "luxuryResidential": "Residencial de lujo",
+      "commercialProperties": "Propiedades comerciales",
+      "firstTimeBuyers": "Primeros compradores"
+    },
+    "activeListings": "{count} propiedades activas",
+    "contactAgent": "Contactar asesor"
+  },
+  "cta": {
+    "titleStart": "¿Listo para encontrar tu",
+    "titleAccent": "próximo hogar?",
+    "description": "Únete a compradores, arrendatarios e inversionistas que confían en {agencyName} para avanzar con seguridad.",
+    "emailPlaceholder": "Ingresa tu correo",
+    "emailLabel": "Correo electrónico",
+    "button": "Comenzar",
+    "disclaimer": "Sin spam. Puedes darte de baja cuando quieras."
+  },
+  "footer": {
+    "description": "La landing inmobiliaria de confianza en {city}. Compra, vende o renta con seguridad.",
+    "social": {
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    },
+    "groups": {
+      "company": {
+        "title": "Empresa",
+        "links": {
+          "about": "Nosotros",
+          "careers": "Carreras",
+          "press": "Prensa",
+          "contact": "Contacto"
+        }
+      },
+      "properties": {
+        "title": "Propiedades",
+        "links": {
+          "forSale": "En venta",
+          "forRent": "En renta",
+          "commercial": "Comercial",
+          "luxury": "Lujo"
+        }
+      },
+      "resources": {
+        "title": "Recursos",
+        "links": {
+          "blog": "Blog",
+          "marketReports": "Reportes de mercado",
+          "mortgageCalculator": "Calculadora hipotecaria",
+          "helpCenter": "Centro de ayuda"
+        }
+      }
+    },
+    "copyright": "© {year} {agencyName}. Todos los derechos reservados.",
+    "legal": {
+      "privacy": "Política de privacidad",
+      "terms": "Términos del servicio",
+      "cookies": "Cookies"
+    }
+  },
+  "notFound": {
+    "eyebrow": "Error / Página no encontrada",
+    "title": "Esta página no existe",
+    "description": "La página que estás buscando fue movida, renombrada o nunca se publicó en esta landing pública.",
+    "home": "Ir al inicio",
+    "browseProperties": "Explorar propiedades",
+    "footer": "HTTP 404 — No encontramos lo que buscabas"
+  }
+}
