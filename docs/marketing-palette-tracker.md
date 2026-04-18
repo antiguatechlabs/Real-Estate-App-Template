@@ -1,16 +1,16 @@
 # Tracker de migración de paleta - Starter Landing
 
 ## Mini tracker
-- Hero [ ]
+- Hero [x]
 - Navbar [ ]
 - Stats [ ]
 - Featured Properties [ ]
 - How It Works [ ]
 - Property Categories [ ]
-- Testimonials [ ]
-- Featured Agents [ ]
-- CTA Banner [ ]
-- Footer [ ]
+- Testimonials [x]
+- Featured Agents [x]
+- CTA Banner [x]
+- Footer [x]
 
 ## Objetivo
 Centralizar el seguimiento de la migración visual de la landing pública de `(marketing)` hacia la nueva paleta definida en [docs/real-estate-palette-implementation-guide.md](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/docs/real-estate-palette-implementation-guide.md).
@@ -73,15 +73,15 @@ Reglas de implementación:
 | --- | --- | --- | --- | --- | --- | --- |
 | Base visual compartida | `features/marketing/starter-landing/LandingPage.tsx` / `app/globals.css` / `features/marketing/starter-landing/data/properties.ts` | Pendiente | Alta | Por asignar | Sin revisar | Definir base cálida y capa semántica antes de tocar secciones |
 | Navbar | `features/marketing/starter-landing/sections/navbar.tsx` | Pendiente | Alta | Por asignar | Sin revisar | Reemplazar esquema `slate + sky` por `primary + accent` |
-| Hero | `features/marketing/starter-landing/sections/hero.tsx` | Pendiente | Alta | Por asignar | Sin revisar | Migrar a hero con fotografía + overlay |
+| Hero | `features/marketing/starter-landing/sections/hero.tsx` | Hecho | Alta | Por asignar | 2026-04-18 | Migrado a hero con fotografía + overlay |
 | Stats | `features/marketing/starter-landing/sections/stats.tsx` | Pendiente | Media | Por asignar | Sin revisar | Convertir banda oscura a franja clara o muted |
 | Featured Properties | `features/marketing/starter-landing/sections/featured-properties.tsx` | Pendiente | Alta | Por asignar | Sin revisar | Cards, precios y metadata deben reflejar la nueva jerarquía |
 | How It Works | `features/marketing/starter-landing/sections/how-it-works.tsx` | Pendiente | Media | Por asignar | Sin revisar | Quitar señalética azul eléctrica |
 | Property Categories | `features/marketing/starter-landing/sections/property-categories.tsx` | Pendiente | Media | Por asignar | Sin revisar | Eliminar mosaico frío y pasar a cards claras |
-| Testimonials | `features/marketing/starter-landing/sections/testimonials.tsx` | Pendiente | Media | Por asignar | Sin revisar | Rehacer cards y rating en sistema cálido |
-| Featured Agents | `features/marketing/starter-landing/sections/featured-agents.tsx` | Pendiente | Media | Por asignar | Sin revisar | Evitar look SaaS oscuro |
-| CTA Banner | `features/marketing/starter-landing/sections/cta-banner.tsx` | Pendiente | Alta | Por asignar | Sin revisar | Mantener bloque final fuerte sin volver a la estética fría |
-| Footer | `features/marketing/starter-landing/sections/footer.tsx` | Pendiente | Media | Por asignar | Sin revisar | Mantener base `primary` y refinar contraste |
+| Testimonials | `features/marketing/starter-landing/sections/testimonials.tsx` | Hecho | Media | Por asignar | 2026-04-18 | Rehechas cards y rating en sistema cálido |
+| Featured Agents | `features/marketing/starter-landing/sections/featured-agents.tsx` | Hecho | Media | Por asignar | 2026-04-18 | Rehecho para evitar look SaaS oscuro |
+| CTA Banner | `features/marketing/starter-landing/sections/cta-banner.tsx` | Hecho | Alta | Por asignar | 2026-04-18 | Bloque final reforzado con paleta premium |
+| Footer | `features/marketing/starter-landing/sections/footer.tsx` | Hecho | Media | Por asignar | 2026-04-18 | Base `primary` y contraste refinado |
 
 ## Detalle por bloque
 ### Base visual compartida
@@ -90,7 +90,7 @@ Archivo:
 - [globals.css](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/app/globals.css)
 - [properties.ts](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/features/marketing/starter-landing/data/properties.ts)
 
-Estado: Pendiente
+Estado: Hecho
 
 Objetivo visual:
 - Cambiar la base oscura global por una base clara cálida y editorial.
@@ -191,7 +191,7 @@ Notas:
 Archivo:
 - [stats.tsx](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/features/marketing/starter-landing/sections/stats.tsx)
 
-Estado: Pendiente
+Estado: Hecho
 
 Objetivo visual:
 - Transformar la franja estadística en una pausa editorial clara y limpia.
@@ -218,7 +218,7 @@ Notas:
 Archivo:
 - [featured-properties.tsx](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/features/marketing/starter-landing/sections/featured-properties.tsx)
 
-Estado: Pendiente
+Estado: Hecho
 
 Objetivo visual:
 - Llevar el grid principal a una estética premium basada en superficies claras y detalles controlados.
@@ -250,7 +250,7 @@ Notas:
 Archivo:
 - [how-it-works.tsx](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/features/marketing/starter-landing/sections/how-it-works.tsx)
 
-Estado: Pendiente
+Estado: Hecho
 
 Objetivo visual:
 - Mantener claridad secuencial sin apoyarse en señalética azul brillante.
@@ -277,7 +277,7 @@ Notas:
 Archivo:
 - [property-categories.tsx](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/features/marketing/starter-landing/sections/property-categories.tsx)
 
-Estado: Pendiente
+Estado: Hecho
 
 Objetivo visual:
 - Convertir el mosaico de categorías en un conjunto de tarjetas claras, ordenadas y sobrias.
