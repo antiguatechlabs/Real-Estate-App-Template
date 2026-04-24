@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
 
 const categories = [
-  { color: "from-sky-900/40 to-slate-900", key: "residential" },
-  { color: "from-blue-900/40 to-slate-900", key: "commercial" },
-  { color: "from-indigo-900/40 to-slate-900", key: "luxury" },
-  { color: "from-violet-900/40 to-slate-900", key: "land" },
+  { accent: "bg-[#12344D]", key: "residential", surface: "bg-white" },
+  { accent: "bg-[#2C7DA0]", key: "commercial", surface: "bg-[#F7F3EC]" },
+  { accent: "bg-[#D4A373]", key: "luxury", surface: "bg-white" },
+  { accent: "bg-[#12344D]", key: "land", surface: "bg-[#F7F3EC]" },
 ] as const;
 
 const categoryIcons = [
@@ -79,13 +79,18 @@ export function PropertyCategories() {
   const t = useTranslations("marketingStarterLanding.propertyCategories");
 
   return (
-    <section id="property-categories" className="scroll-mt-24 px-6 py-20">
+    <section
+      id="property-categories"
+      className="scroll-mt-24 bg-[#F7F3EC] px-6 py-24 md:py-32"
+    >
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12 text-center">
-          <p className="mb-2 text-sm font-medium uppercase tracking-widest text-sky-400">
+        <div className="mb-12 max-w-2xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.28em] text-[#2C7DA0]">
             {t("eyebrow")}
           </p>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">{t("title")}</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-[#12344D] sm:text-4xl lg:text-5xl">
+            {t("title")}
+          </h2>
         </div>
 
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -93,15 +98,15 @@ export function PropertyCategories() {
             <a
               key={category.key}
               href="#featured-properties"
-              className={`group relative flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br ${category.color} p-8 text-center transition-all duration-300 hover:scale-[1.02] hover:border-sky-500/40`}
+              className={`group relative flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-[28px] border border-[#E5E7EB] ${category.surface} p-8 text-center shadow-[0_18px_50px_rgba(18,52,77,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_70px_rgba(18,52,77,0.10)]`}
             >
-              <div className="absolute inset-0 rounded-2xl bg-sky-500/0 transition-all duration-300 group-hover:bg-sky-500/5" />
-              <div className="relative z-10 text-sky-300 transition-colors duration-200 group-hover:text-sky-200">
+              <div className={`absolute left-0 right-0 top-0 h-1 ${category.accent}`} aria-hidden="true" />
+              <div className="relative z-10 text-[#2C7DA0] transition-colors duration-200 group-hover:text-[#12344D]">
                 {categoryIcons[index]}
               </div>
               <div className="relative z-10">
-                <p className="font-semibold text-white">{t(`items.${category.key}.label`)}</p>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="font-semibold text-[#12344D]">{t(`items.${category.key}.label`)}</p>
+                <p className="mt-1 text-xs text-[#4B5563]">
                   {t(`items.${category.key}.count`)}
                 </p>
               </div>

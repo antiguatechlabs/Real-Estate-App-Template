@@ -10,18 +10,23 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
   const t = useTranslations("marketingStarterLanding.featuredProperties");
 
   return (
-    <section id="featured-properties" className="scroll-mt-24 px-6 py-20">
+    <section
+      id="featured-properties"
+      className="scroll-mt-24 bg-[#F7F3EC] px-6 py-24 md:py-32"
+    >
       <div className="mx-auto max-w-6xl">
-        <div className="mb-10 flex items-end justify-between gap-4">
-          <div>
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-sky-400">
+        <div className="mb-12 flex items-end justify-between gap-4">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.28em] text-[#2C7DA0]">
               {t("eyebrow")}
             </p>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">{t("title")}</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-[#12344D] sm:text-4xl lg:text-5xl">
+              {t("title")}
+            </h2>
           </div>
           <a
             href="#cta"
-            className="hidden items-center gap-1 text-sm text-slate-400 transition-colors duration-200 hover:text-sky-400 sm:flex"
+            className="hidden items-center gap-1 text-sm font-medium text-[#4B5563] transition-colors duration-200 hover:text-[#12344D] sm:flex"
           >
             {t("viewAll")}
             <svg
@@ -44,26 +49,27 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
           {properties.map((property) => (
             <article
               key={property.id}
-              className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:border-sky-500/30 hover:shadow-2xl hover:shadow-sky-950/40"
+              className="group overflow-hidden rounded-[28px] border border-[#E5E7EB] bg-white shadow-[0_24px_60px_rgba(18,52,77,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_32px_80px_rgba(18,52,77,0.14)]"
             >
               <div
-                className={`relative flex h-52 items-end bg-gradient-to-br ${property.gradient} p-4`}
+                className={`relative flex h-56 items-end overflow-hidden bg-gradient-to-br ${property.gradient} p-5`}
               >
-                <span className="rounded-lg bg-sky-500 px-3 py-1 text-sm font-semibold text-white">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,52,77,0.08)_0%,rgba(18,52,77,0.58)_100%)]" />
+                <span className="relative rounded-full bg-[#D4A373] px-3 py-1 text-sm font-semibold text-[#12344D] shadow-sm">
                   {property.price}
                 </span>
-                <span className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 text-xs text-slate-200 backdrop-blur-sm">
+                <span className="absolute right-5 top-5 rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
                   {t(`types.${property.typeKey}`)}
                 </span>
               </div>
 
-              <div className="space-y-3 p-5">
+              <div className="space-y-4 p-6">
                 <div>
-                  <p className="font-semibold text-white">{property.address}</p>
-                  <p className="text-sm text-slate-400">{property.city}</p>
+                  <p className="font-semibold text-[#12344D]">{property.address}</p>
+                  <p className="text-sm text-[#4B5563]">{property.city}</p>
                 </div>
 
-                <div className="flex items-center gap-4 text-sm text-slate-400">
+                <div className="flex items-center gap-4 text-sm text-[#2C7DA0]">
                   <span className="flex items-center gap-1.5">
                     <svg
                       width="14"
@@ -98,10 +104,10 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
                     </svg>
                     {t("baths", { count: property.baths })}
                   </span>
-                  <span>{t("sqft", { count: property.sqft })}</span>
+                  <span className="text-[#4B5563]">{t("sqft", { count: property.sqft })}</span>
                 </div>
 
-                <button className="w-full cursor-pointer rounded-xl border border-sky-500/30 py-2.5 text-center text-sm font-medium text-sky-400 transition-colors duration-200 hover:bg-sky-500/10">
+                <button className="w-full cursor-pointer rounded-xl border border-[#D1D5DB] bg-[#F7F3EC] py-3 text-center text-sm font-semibold text-[#12344D] transition-colors duration-200 hover:border-[#D4A373] hover:bg-[#EFE8DD] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]">
                   {t("viewDetails")}
                 </button>
               </div>

@@ -10,21 +10,31 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   const t = useTranslations("marketingStarterLanding.testimonials");
 
   return (
-    <section id="testimonials" className="scroll-mt-24 bg-slate-900/30 px-6 py-20">
+    <section
+      id="testimonials"
+      className="scroll-mt-24 overflow-hidden bg-[#F7F3EC] px-6 py-24 md:py-32"
+    >
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12 text-center">
-          <p className="mb-2 text-sm font-medium uppercase tracking-widest text-sky-400">
+        <div className="mb-14 max-w-2xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.28em] text-[#2C7DA0]">
             {t("eyebrow")}
           </p>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">{t("title")}</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-[#12344D] sm:text-4xl lg:text-5xl">
+            {t("title")}
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#4B5563] sm:text-base">
+            Testimonios con una lectura cálida, de confianza y sin ruido visual.
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.name}
-              className="flex flex-col gap-5 rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-300 hover:border-sky-500/20"
+              className="flex flex-col gap-5 rounded-[28px] border border-[#E5E7EB] bg-white p-6 shadow-[0_24px_60px_rgba(18,52,77,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(18,52,77,0.12)]"
             >
+              <div className="h-1 w-14 rounded-full bg-[#D4A373]" aria-hidden="true" />
+
               <div className="flex gap-0.5" aria-label={t("ratingLabel")}>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <svg
@@ -32,7 +42,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                     width="16"
                     height="16"
                     viewBox="0 0 24 24"
-                    fill="#0ea5e9"
+                    fill="#D4A373"
                     aria-hidden="true"
                   >
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -40,17 +50,17 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                 ))}
               </div>
 
-              <p className="flex-1 text-sm leading-relaxed text-slate-300">
+              <p className="flex-1 text-sm leading-relaxed text-[#1F2937] sm:text-[15px]">
                 &ldquo;{t(`quotes.${testimonial.key}`)}&rdquo;
               </p>
 
-              <div className="flex items-center gap-3 border-t border-white/[0.06] pt-2">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-sky-600 to-blue-700 text-sm font-semibold text-white">
+              <div className="flex items-center gap-3 border-t border-[#E5E7EB] pt-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#12344D] to-[#2C7DA0] text-sm font-semibold text-white ring-4 ring-[#F7F3EC]">
                   {testimonial.initials}
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-white">{testimonial.name}</p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-sm font-semibold text-[#12344D]">{testimonial.name}</p>
+                  <p className="text-xs text-[#4B5563]">
                     {t(`roles.${testimonial.roleKey}`)}
                   </p>
                 </div>

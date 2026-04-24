@@ -23,33 +23,33 @@ export function Footer({ brand, locale }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/[0.06] bg-slate-950 px-6 py-16">
+    <footer className="border-t border-white/10 bg-[#12344D] px-6 py-16 text-white">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
             <Link href={`/${locale}`} className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-blue-600">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#D4A373]">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M8 1L1 6v9h5v-5h4v5h5V6L8 1z" fill="white" />
+                  <path d="M8 1L1 6v9h5v-5h4v5h5V6L8 1z" fill="#12344D" />
                 </svg>
               </div>
-              <span className="font-semibold text-white">{brand.agencyName}</span>
+              <span className="font-semibold tracking-tight text-white">{brand.agencyName}</span>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-500">
+            <p className="max-w-xs text-sm leading-relaxed text-white/70">
               {t("description", { city: brand.city })}
             </p>
             <div className="flex gap-3">
               <a
                 href={brand.socialLinks.twitter}
                 aria-label={t("social.twitter")}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.06] transition-colors duration-200 hover:bg-white/[0.10]"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4A373]"
               >
                 <svg
                   width="14"
                   height="14"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="text-slate-400"
+                  className="text-white/75"
                   aria-hidden="true"
                 >
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -58,14 +58,14 @@ export function Footer({ brand, locale }: FooterProps) {
               <a
                 href={brand.socialLinks.linkedin}
                 aria-label={t("social.linkedin")}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.06] transition-colors duration-200 hover:bg-white/[0.10]"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4A373]"
               >
                 <svg
                   width="14"
                   height="14"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="text-slate-400"
+                  className="text-white/75"
                   aria-hidden="true"
                 >
                   <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
@@ -75,7 +75,7 @@ export function Footer({ brand, locale }: FooterProps) {
               <a
                 href={brand.socialLinks.instagram}
                 aria-label={t("social.instagram")}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.06] transition-colors duration-200 hover:bg-white/[0.10]"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4A373]"
               >
                 <svg
                   width="14"
@@ -86,7 +86,7 @@ export function Footer({ brand, locale }: FooterProps) {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-slate-400"
+                  className="text-white/75"
                   aria-hidden="true"
                 >
                   <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -99,7 +99,7 @@ export function Footer({ brand, locale }: FooterProps) {
 
           {footerGroups.map((group) => (
             <div key={group.key}>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
                 {t(`groups.${group.key}.title`)}
               </p>
               <ul className="space-y-2.5">
@@ -107,7 +107,7 @@ export function Footer({ brand, locale }: FooterProps) {
                   <li key={linkKey}>
                     <a
                       href="#cta"
-                      className="text-sm text-slate-500 transition-colors duration-200 hover:text-white"
+                      className="text-sm text-white/65 transition-colors duration-200 hover:text-[#D4A373]"
                     >
                       {t(`groups.${group.key}.links.${linkKey}`)}
                     </a>
@@ -118,7 +118,7 @@ export function Footer({ brand, locale }: FooterProps) {
           ))}
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-8 text-xs text-slate-600 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-xs text-white/55 sm:flex-row">
           <p>
             {t("copyright", {
               agencyName: brand.agencyName,
@@ -126,13 +126,13 @@ export function Footer({ brand, locale }: FooterProps) {
             })}
           </p>
           <div className="flex gap-6">
-            <a href="#cta" className="transition-colors duration-200 hover:text-slate-400">
+            <a href="#cta" className="transition-colors duration-200 hover:text-[#D4A373]">
               {t("legal.privacy")}
             </a>
-            <a href="#cta" className="transition-colors duration-200 hover:text-slate-400">
+            <a href="#cta" className="transition-colors duration-200 hover:text-[#D4A373]">
               {t("legal.terms")}
             </a>
-            <a href="#cta" className="transition-colors duration-200 hover:text-slate-400">
+            <a href="#cta" className="transition-colors duration-200 hover:text-[#D4A373]">
               {t("legal.cookies")}
             </a>
           </div>

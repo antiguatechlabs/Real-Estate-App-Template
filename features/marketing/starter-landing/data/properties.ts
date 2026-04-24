@@ -10,7 +10,7 @@ export const featuredProperties: PropertyCardData[] = [
     baths: 3,
     sqft: "2,340",
     typeKey: "singleFamily",
-    gradient: "from-slate-700 to-slate-800",
+    gradient: "from-[#C8B79B] via-[#B89E7A] to-[#6B7F8E]",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const featuredProperties: PropertyCardData[] = [
     baths: 2,
     sqft: "1,100",
     typeKey: "apartment",
-    gradient: "from-slate-800 to-slate-700",
+    gradient: "from-[#D4C4AD] via-[#B7D0D9] to-[#7A95A8]",
   },
   {
     id: 3,
@@ -32,6 +32,6 @@ export const featuredProperties: PropertyCardData[] = [
     baths: 4,
     sqft: "4,820",
     typeKey: "luxury",
-    gradient: "from-slate-700 to-slate-900",
+    gradient: "from-[#D4A373] via-[#A07149] to-[#12344D]",
   },
 ];
