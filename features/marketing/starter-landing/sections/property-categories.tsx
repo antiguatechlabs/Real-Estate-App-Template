@@ -81,7 +81,7 @@ export function PropertyCategories() {
   return (
     <section
       id="property-categories"
-      className="scroll-mt-24 bg-[#F7F3EC] px-6 py-24 md:py-32"
+      className="scroll-mt-24 bg-[#F7F3EC] px-4 py-20 md:px-6 md:py-32"
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 max-w-2xl">
@@ -98,7 +98,7 @@ export function PropertyCategories() {
             <a
               key={category.key}
               href="#featured-properties"
-              className={`group relative flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-[28px] border border-[#E5E7EB] ${category.surface} p-8 text-center shadow-[0_18px_50px_rgba(18,52,77,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_70px_rgba(18,52,77,0.10)]`}
+              className={`group relative flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-[#E5E7EB] ${category.surface} p-6 text-center transition-colors duration-300 hover:border-[#D4A373] md:p-8`}
             >
               <div className={`absolute left-0 right-0 top-0 h-1 ${category.accent}`} aria-hidden="true" />
               <div className="relative z-10 text-[#2C7DA0] transition-colors duration-200 group-hover:text-[#12344D]">

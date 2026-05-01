@@ -11,8 +11,8 @@ export function Stats() {
   const t = useTranslations("marketingStarterLanding.stats.items");
 
   return (
-    <section className="bg-[#F7F3EC] px-6 py-12 md:py-16">
-      <div className="mx-auto max-w-7xl rounded-[28px] border border-[#E5E7EB] bg-white px-6 py-8 shadow-[0_18px_50px_rgba(18,52,77,0.06)]">
+    <section className="bg-[#F7F3EC] px-4 py-10 md:px-6 md:py-16">
+      <div className="mx-auto max-w-7xl rounded-2xl border border-[#E5E7EB] bg-white px-5 py-7">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-0">
         {stats.map((stat, index) => (
           <div

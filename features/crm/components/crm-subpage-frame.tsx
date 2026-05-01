@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { Tooltip } from "@/components/ui/tooltip";
+
 type CrmSubpageFrameProps = {
   title: string;
   description: string;
@@ -26,48 +28,52 @@ export function CrmSubpageFrame({
   secondaryLabel,
 }: CrmSubpageFrameProps) {
   return (
-    <main className="w-full max-w-full overflow-x-hidden px-4 py-8 text-slate-50">
-      <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-6 rounded-[30px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_30px_100px_rgba(0,0,0,0.28)] backdrop-blur md:p-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+    <main className="w-full max-w-full overflow-x-hidden px-4 py-6 text-[#111111] md:py-10">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 rounded-2xl border border-[#E5E1D8] bg-[#FBFAF7]/92 p-5 md:p-8">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="text-xs uppercase tracking-[0.34em] text-cyan-200/70">
+            <p className="text-sm font-medium text-[#74776F]">
               {eyebrow}
             </p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
+            <h1 className="mt-3 max-w-4xl text-[clamp(2.25rem,5vw,4.75rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
               {title}
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-[#5E625C] md:text-base">
               {description}
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row md:shrink-0">
             <Link
               href={secondaryHref}
-              className="inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100 transition-colors hover:bg-white/10"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-[#D8D2C8] bg-white px-4 py-2 text-sm font-semibold text-[#111111] transition-colors hover:border-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
             >
               {secondaryLabel}
             </Link>
             <Link
               href={primaryHref}
-              className="inline-flex items-center justify-center rounded-md border border-white/10 bg-slate-950 px-4 py-2 text-sm font-medium text-slate-50 shadow-[0_8px_24px_rgba(0,0,0,0.22)] transition-transform hover:-translate-y-0.5 hover:bg-slate-900"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-[#111111] bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#333333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
             >
               {primaryLabel}
             </Link>
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-px overflow-hidden rounded-xl border border-[#E5E1D8] bg-[#E5E1D8] md:grid-cols-3">
           {highlights.map((item) => (
             <article
               key={item.label}
-              className="rounded-md border border-white/10 bg-slate-950/70 p-5"
+              className="flex items-start justify-between gap-4 bg-white p-5"
             >
-              <p className="text-xs uppercase tracking-[0.28em] text-slate-400">
-                {item.label}
-              </p>
-              <p className="mt-2 text-xl font-semibold text-slate-50">{item.value}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-300">{item.note}</p>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#74776F]">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-xl font-semibold text-[#111111]">
+                  {item.value}
+                </p>
+              </div>
+              <Tooltip content={item.note} />
             </article>
           ))}
         </div>

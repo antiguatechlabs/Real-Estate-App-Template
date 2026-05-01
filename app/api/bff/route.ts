@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const payload = {
-    name: "BFF placeholder",
-    description: "Ruta compartida para mediación entre Laravel y los clientes Next.js",
-    lastUpdated: new Date().toISOString(),
+    configured: Boolean(process.env.CRM_API_BASE_URL ?? process.env.NEXT_PUBLIC_CRM_API_BASE_URL),
+    name: "CRM BFF",
+    tenant: process.env.CRM_TENANT_CODE ?? "MERCAFARMA",
   };
 
   return NextResponse.json(payload);

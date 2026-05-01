@@ -38,8 +38,9 @@ export type CrmTestimonial = {
 
 export const crmNavLinks: CrmNavLink[] = [
   { label: "Resumen", href: "#resumen" },
-  { label: "Proyectos", href: "#proyectos" },
+  { label: "Proyectos", href: "#empresa" },
   { label: "Lotes", href: "#lotes" },
+  { label: "Operación", href: "#operacion" },
   { label: "Configuración", href: "#configuracion" },
 ];
 

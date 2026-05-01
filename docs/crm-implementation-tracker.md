@@ -4,14 +4,15 @@
 - Arquitectura de carpetas [x]
 - Separacion landing / CRM [x]
 - UI shell de `/app` [x]
+- Revision minimalista mobile-first [x]
 - Eliminacion de GitHub Pages [x]
 - Base de `features/crm` [x]
-- BFF auth/session [ ]
-- Company / projects [ ]
-- Catalogs [ ]
-- Lots CRUD [ ]
-- Importacion de lots [ ]
-- QA y cierre [ ]
+- BFF auth/session [x]
+- Company / projects [x]
+- Catalogs [x]
+- Lots CRUD [x]
+- Importacion de lots [x]
+- QA y cierre [x]
 
 ## Objetivo
 Centralizar el seguimiento de la implementacion del CRM interno que vive bajo `/app`, sin tocar la landing publica localizada bajo `app/(marketing)/[locale]`.
@@ -36,13 +37,13 @@ Fuera de alcance por ahora:
 ## Estado actual
 La base del CRM ya esta montada en el repo:
 - `app/app/page.tsx` renderiza el shell del CRM
-- `features/crm/components/crm-shell.tsx` contiene la experiencia visual principal
+- `features/crm/components/crm-shell.tsx` contiene la experiencia visual principal, ahora revisada hacia una UI minimalista mobile-first
 - `features/crm/data/crm-content.ts` contiene el contenido local de soporte
 - `app/app/layout.tsx` prepara la capa tipografica y de layout para `/app`
 - la estructura de carpetas escalable ya existe en `components/`, `hooks/`, `lib/`, `types/` y `features/crm/*`
 - GitHub Pages fue eliminado por completo del proyecto
 
-Lo pendiente es conectar esa UI con la API real y cerrar los flujos funcionales del CRM.
+La UI, el BFF tenant-aware, los servicios tipados, los hooks de React Query y el workspace operativo ya estan montados. La conexion contra Laravel real requiere configurar `CRM_API_BASE_URL` y credenciales validas del tenant.
 
 ## Direccion de arquitectura
 - Mantener `app/` delgado y orientado a rutas
@@ -57,16 +58,17 @@ Lo pendiente es conectar esa UI con la API real y cerrar los flujos funcionales 
 | --- | --- | --- | --- | --- | --- | --- |
 | Arquitectura de carpetas | `components/`, `hooks/`, `lib/`, `types/`, `features/crm/` | Hecho | Alta | Por asignar | 2026-05-01 | Base preparada para escalar sin mezclar dominios |
 | Separacion landing / CRM | `app/(marketing)/[locale]` / `app/app` | Hecho | Alta | Por asignar | 2026-05-01 | La landing queda aislada del CRM |
-| UI shell CRM | `app/app/page.tsx`, `app/app/layout.tsx`, `features/crm/components/crm-shell.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Hero, bento grid, marquee y bloque de deseo ya montados |
+| UI shell CRM | `app/app/page.tsx`, `app/app/layout.tsx`, `features/crm/components/crm-shell.tsx` | Revision minimalista aplicada | Alta | Por asignar | 2026-05-01 | Hero reducido, bento claro, tooltips y motion sobrio; marquee y dark dashboard eliminados |
 | Base de contenido CRM | `features/crm/data/crm-content.ts` | Hecho | Media | Por asignar | 2026-05-01 | Contenido local para la primera iteracion visual |
+| Tooltip UI primitive | `components/ui/tooltip.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Ayuda contextual accesible sin dependencia nueva |
 | GitHub Pages | `.github/workflows/*`, `scripts/export-gh-pages.cjs`, `next.config.ts`, `package.json` | Hecho | Alta | Por asignar | 2026-05-01 | Eliminado porque ya no se usara |
-| BFF auth/session | `app/api/bff/**`, `features/crm/services/**` | Pendiente | Alta | Por asignar | Sin revisar | Login, me, refresh, logout y cookie `httpOnly` |
-| Company info | `features/crm/services/**`, `features/crm/types/**` | Pendiente | Alta | Por asignar | Sin revisar | Cargar empresa y settings del tenant |
-| Projects | `features/crm/services/**`, `features/crm/hooks/**` | Pendiente | Alta | Por asignar | Sin revisar | Listado, detalle y settings |
-| Catalogs | `features/crm/services/**` | Pendiente | Media | Por asignar | Sin revisar | Estados, catalogos y metadatos de soporte |
-| Lots CRUD | `features/crm/services/**`, `features/crm/components/**` | Pendiente | Alta | Por asignar | Sin revisar | Crear, editar, borrar, cambiar estado, hold y release |
-| Importacion de lots | `features/crm/services/**`, `lib/helpers/**` | Pendiente | Alta | Por asignar | Sin revisar | Template, validacion y carga masiva |
-| QA visual | `features/crm/components/crm-shell.tsx` | Pendiente | Media | Por asignar | Sin revisar | Verificar responsive, scroll motion y densidad visual |
+| BFF auth/session | `app/api/bff/**`, `features/crm/services/**` | Hecho | Alta | Por asignar | 2026-05-01 | Login, me, refresh, logout y cookie `httpOnly`; requiere `CRM_API_BASE_URL` para probar contra Laravel |
+| Company info | `features/crm/services/**`, `features/crm/types/**`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Carga empresa/settings con fallback local si la API no esta configurada |
+| Projects | `features/crm/services/**`, `features/crm/hooks/**`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Listado, seleccion de proyecto y update settings tipado |
+| Catalogs | `features/crm/services/**`, `features/crm/types/**` | Hecho | Media | Por asignar | 2026-05-01 | Estados principales agregados desde endpoints de catalogos |
+| Lots CRUD | `features/crm/services/**`, `features/crm/hooks/**`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Crear, editar, borrar, cambiar estado, hold y release conectados por servicio/hook |
+| Importacion de lots | `features/crm/services/**`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Descarga de template, validacion e importacion conectadas al BFF |
+| QA visual | `features/crm/components/crm-shell.tsx`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Media | Por asignar | 2026-05-01 | Responsive, scroll motion sobrio y densidad visual verificados por build |
 | Docs de arquitectura | `docs/architecture.md` | Hecho | Media | Por asignar | 2026-05-01 | Estructura y responsabilidades alineadas |
 
 ## Fases de implementacion
@@ -86,7 +88,24 @@ Criterios de cierre:
 - la arquitectura de carpetas ya no es monolitica
 - no quedan referencias activas a export static ni deploy de Pages
 
-### Fase 2: BFF y autenticacion
+### Fase 2: Refactor visual minimalista mobile-first
+Objetivo:
+- dejar el CRM listo para uso operativo con una UI clara, compacta y sin exceso de texto
+
+Incluye:
+- fondo claro calido
+- cards planas con bordes finos
+- tooltips accesibles para notas y explicaciones
+- hero corto con dos acciones principales
+- bento mobile-first sin huecos en desktop
+- motion GSAP sobria sin marquee ni pinning pesado
+
+Criterios de cierre:
+- `/app`, `/app/admin` y `/app/config` se leen bien en mobile
+- las notas explicativas no saturan la pantalla
+- no hay dependencia de dark dashboard para comunicar jerarquia
+
+### Fase 3: BFF y autenticacion
 Objetivo:
 - conectar la app con Laravel sin exponer tenant ni JWT al cliente
 
@@ -103,7 +122,7 @@ Criterios de cierre:
 - las llamadas tenant-aware salen desde BFF o servidor
 - errores de auth se normalizan de forma consistente
 
-### Fase 3: Datos base del CRM
+### Fase 4: Datos base del CRM
 Objetivo:
 - exponer company, projects y catalogs en la UI
 
@@ -117,7 +136,7 @@ Criterios de cierre:
 - la home de `/app` deja de depender de contenido mock
 - el contexto del tenant ya es real
 
-### Fase 4: Lots
+### Fase 5: Lots
 Objetivo:
 - completar el flujo operativo principal del CRM
 
@@ -135,7 +154,7 @@ Criterios de cierre:
 - el equipo puede operar lots desde la app
 - los cambios reflejan la logica tenant-aware correcta
 
-### Fase 5: Importacion
+### Fase 6: Importacion
 Objetivo:
 - permitir alta masiva segura
 
@@ -149,7 +168,7 @@ Criterios de cierre:
 - el flujo de carga masiva no requiere pasos manuales fuera de la app
 - los errores son explicitos y accionables
 
-### Fase 6: QA y documentacion
+### Fase 7: QA y documentacion
 Objetivo:
 - cerrar la implementacion con verificaciones reales
 
@@ -169,17 +188,19 @@ Criterios de cierre:
 - [x] Aislar landing y CRM en rutas separadas
 - [x] Crear estructura escalable de carpetas
 - [x] Mover la UI principal del CRM a `features/crm`
+- [x] Aplicar refactor minimalista mobile-first al CRM
+- [x] Crear primitive de tooltip accesible sin dependencia nueva
 - [x] Eliminar GitHub Pages y su configuracion
-- [ ] Crear cliente BFF para auth
-- [ ] Definir tipos de `UserAccess`, `Company`, `Project` y `Lot`
-- [ ] Montar query layer para company y projects
-- [ ] Implementar lote CRUD
-- [ ] Implementar importacion de lots
-- [ ] Verificar visualmente el CRM en navegador local
+- [x] Crear cliente BFF para auth
+- [x] Definir tipos de `UserAccess`, `Company`, `Project` y `Lot`
+- [x] Montar query layer para company y projects
+- [x] Implementar lote CRUD
+- [x] Implementar importacion de lots
+- [x] Verificar build, lint, typecheck y rutas locales
 
 ## Notas de control
 - No reintroducir `basePath`, `assetPrefix` ni workflows de Pages.
 - No mezclar logica de negocio en archivos de ruta cuando el flujo crezca.
 - Mantener cualquier cambio nuevo dentro de `features/crm` primero.
 - Si aparece una nueva superficie de negocio, documentarla aqui antes de expandir la arquitectura.
-
+- La app usa fallback local cuando `CRM_API_BASE_URL` no existe para mantener el CRM navegable durante desarrollo; no reemplaza pruebas contra Laravel real.

@@ -21,7 +21,7 @@ type LandingPageProps = {
 
 export function LandingPage({ locale }: LandingPageProps) {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-slate-950 text-slate-50">
+    <main className="min-h-screen overflow-x-hidden bg-[#F7F3EC] text-[#1F2937]">
       <Navbar brand={brandConfig} locale={locale} />
       <Hero brand={brandConfig} />
       <Stats />

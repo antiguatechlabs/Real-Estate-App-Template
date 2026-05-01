@@ -12,7 +12,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   return (
     <section
       id="testimonials"
-      className="scroll-mt-24 overflow-hidden bg-[#F7F3EC] px-6 py-24 md:py-32"
+      className="scroll-mt-24 overflow-hidden bg-[#F7F3EC] px-4 py-20 md:px-6 md:py-32"
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 max-w-2xl">
@@ -22,16 +22,13 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
           <h2 className="text-3xl font-bold tracking-tight text-[#12344D] sm:text-4xl lg:text-5xl">
             {t("title")}
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#4B5563] sm:text-base">
-            Testimonios con una lectura cálida, de confianza y sin ruido visual.
-          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.name}
-              className="flex flex-col gap-5 rounded-[28px] border border-[#E5E7EB] bg-white p-6 shadow-[0_24px_60px_rgba(18,52,77,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(18,52,77,0.12)]"
+              className="flex flex-col gap-5 rounded-2xl border border-[#E5E7EB] bg-white p-5 transition-colors duration-300 hover:border-[#D4A373] md:p-6"
             >
               <div className="h-1 w-14 rounded-full bg-[#D4A373]" aria-hidden="true" />
 

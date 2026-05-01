@@ -88,6 +88,7 @@ docs/
 - `app/app/page.tsx` monta la aplicación principal del cliente bajo la ruta `/app`.
 - `app/app/admin/page.tsx` y `app/app/config/page.tsx` preparan las superficies internas de administración y configuración del CRM.
 - `app/api/bff/route.ts` contiene los endpoints del BFF que hablan con el backend Laravel antes de exponer datos al cliente.
+- `app/api/bff/[...path]/route.ts` actua como proxy tenant-aware hacia Laravel, inyecta `X-Tenant-Code` y guarda el JWT en cookie `httpOnly`.
 - `proxy.ts` negocia el locale para la superficie pública y excluye rutas internas como `/app` y `/api`.
 
 ## Folder responsibilities
@@ -161,6 +162,7 @@ docs/
 - Treat `i18n/` as cross-cutting infrastructure and `messages/` as feature-scoped content. The CRM can adopt the same foundation later without reworking routing.
 - Keep export-related logic for `xlsx`, `jspdf`, and `jspdf-autotable` isolated in dedicated modules instead of embedding it directly inside page files.
 - Keep `react-calendar` usage inside clear calendar or scheduling components instead of route-level JSX when possible.
+- Configure `CRM_API_BASE_URL` for the Laravel backend and optionally `CRM_TENANT_CODE`; the client must consume Laravel through `/api/bff/**`, not directly.
 
 ## Change management
 
