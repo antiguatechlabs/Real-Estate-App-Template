@@ -23,6 +23,13 @@ app/
   page.tsx
   providers.tsx
 features/
+  crm/
+    components/
+    data/
+    hooks/
+    lib/
+    services/
+    types/
   marketing/
 i18n/
 messages/
@@ -42,7 +49,6 @@ messages/
 app/
   (marketing)/
     [locale]/
-  (crm)/
   api/
   globals.css
   layout.tsx
@@ -53,14 +59,17 @@ components/
   ui/
   shared/
 features/
+  crm/
+    components/
+    data/
+    hooks/
+    lib/
+    services/
+    types/
   marketing/
     starter-landing/
-  properties/
-  clients/
-  calendar/
-  reports/
-crm/
 lib/
+  helpers/
   utils/
   constants/
   services/
@@ -77,6 +86,7 @@ docs/
 - `app/(marketing)/[locale]/page.tsx` monta la landing pública localizada (`/es`, `/en`, etc.).
 - `app/(marketing)/[locale]/not-found.tsx` contiene la 404 localizada para la superficie pública.
 - `app/app/page.tsx` monta la aplicación principal del cliente bajo la ruta `/app`.
+- `app/app/admin/page.tsx` y `app/app/config/page.tsx` preparan las superficies internas de administración y configuración del CRM.
 - `app/api/bff/route.ts` contiene los endpoints del BFF que hablan con el backend Laravel antes de exponer datos al cliente.
 - `proxy.ts` negocia el locale para la superficie pública y excluye rutas internas como `/app` y `/api`.
 
@@ -92,17 +102,36 @@ docs/
 - `components/ui/` for reusable low-level UI primitives.
 - `components/shared/` for cross-feature composed components used in multiple modules.
 
+### `components/ui/`
+
+- Basic design-system primitives that can be reused across landing and CRM.
+
+### `components/shared/`
+
+- Shared composed blocks that are not specific to one feature but are too opinionated for `components/ui/`.
+
 ### `features/`
 
 - Main home for domain-specific code.
 - Each feature can contain its own components, hooks, server helpers, query options, and types.
-- Example: `features/properties`, `features/clients`, `features/calendar`, `features/reports`.
+- Example: `features/crm`, `features/properties`, `features/clients`, `features/calendar`, `features/reports`.
 - `features/marketing/starter-landing/` concentra la landing pública base que se entrega como parte del proyecto.
+
+### `features/crm/`
+
+- CRM domain code should stay here.
+- Keep presentational building blocks in `components/` and local mock/data contracts in `data/`.
+- Use `hooks/` for CRM-only client hooks, `lib/` for local pure helpers, `services/` for CRM API/BFF adapters, and `types/` for CRM-only contracts.
+- Add feature-specific hooks or API adapters here before promoting anything to `lib/`.
 
 ### `lib/`
 
 - Shared utilities, helpers, constants, formatting functions, and service wrappers.
 - Avoid putting feature-specific business rules here unless they are genuinely cross-cutting.
+
+### `lib/helpers/`
+
+- Small pure helpers shared across features when they are not stateful and do not belong in a feature folder.
 
 ### `i18n/`
 

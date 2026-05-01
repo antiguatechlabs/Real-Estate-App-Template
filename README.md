@@ -4,7 +4,7 @@ Esta plantilla reúne los cimientos para piezas digitales del ecosistema inmobil
 
 ## Arquitectura general
 - El backend monolítico se basa en Laravel + PostgreSQL; la comunicación desde el frontend se canaliza exclusivamente a través del **BFF en Next.js**, que agrega la capa de autorización, caché y adaptación de datos para cada cliente.
-- Dentro de este repo la carpeta `app/` alberga la BFF, la app y la landing page, de modo que cada nueva implementación puede replicar la estructura y solo cambiar la configuración o los módulos propios del cliente.
+- Dentro de este repo la carpeta `app/` alberga la landing pública, la app interna y las rutas API/BFF, de modo que cada nueva implementación puede replicar la estructura y solo cambiar la configuración o los módulos propios del cliente.
 - Usa React 19 con Tailwind CSS para la interfaz, React Query para la capa de datos y utilidades listas para exportar reportes (`xlsx`, `jspdf`, `jspdf-autotable`) y calendarios (`react-calendar`).
 
 ## Stack principal
@@ -36,14 +36,6 @@ Esta plantilla reúne los cimientos para piezas digitales del ecosistema inmobil
 - `npm run start`
 - `npm run lint`
 - `npm run typecheck`
-- `npm run export`
-
-## Despliegue en GitHub Pages
-
-- El sitio se exporta como HTML estático solo durante `npm run export`, que lanza `scripts/export-gh-pages.cjs`. Ese script mueve temporalmente `app/api` y el catch all `[...rest]` fuera de `app`, borra `out/`, ejecuta `NEXT_EXPORT=1 npm run build --webpack` (retomando `output: "export"`), y deja el HTML generado junto con `_next` y demás activos dentro de `out/`. El `basePath` se calcula desde `NEXT_PUBLIC_BASE_PATH` (o por defecto tomando el nombre del repositorio) antes de publicar `out/` en GitHub Pages.
-- Para pruebas locales copia el nombre del repositorio y pásalo como `NEXT_PUBLIC_BASE_PATH` antes de correr la exportación (por ejemplo `NEXT_PUBLIC_BASE_PATH=/real-estate-app-template npm run export`). Si estás desplegando a tu página personal (`<username>.github.io`) deja `NEXT_PUBLIC_BASE_PATH` vacío o no lo definas.
-- GitHub Actions ejecuta `.github/workflows/deploy-gh-pages.yml` en cada `push` sobre `main`. El flujo instala dependencias (`npm ci`), ejecuta `npm run export` con `NEXT_PUBLIC_BASE_PATH=/<repo>` y publica `out/` con `peaceiris/actions-gh-pages@v4`. El resultado se sirve desde la rama `gh-pages`.
-- Si necesitas un dominio personalizado o una rama desplegada diferente, ajusta la variable `NEXT_PUBLIC_BASE_PATH` (y el `basePath` en `next.config.ts` si haces cambios manuales) antes de volver a exportar.
 
 ## Recursos y documentación
 - [docs/context.md](docs/context.md)
