@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { Tooltip } from "@/components/ui/tooltip";
+
 import type { PropertyCardData } from "../types";
 
 type FeaturedPropertiesProps = {
@@ -65,11 +67,62 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
 
               <div className="space-y-4 p-6">
                 <div>
-                  <p className="font-semibold text-[#12344D]">{property.address}</p>
-                  <p className="text-sm text-[#4B5563]">{property.city}</p>
+                  <div className="flex min-w-0 items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="break-words font-semibold text-[#12344D]">
+                        {property.address}
+                      </p>
+                      <p className="break-words text-sm text-[#4B5563]">
+                        {property.city}
+                      </p>
+                    </div>
+                    <Tooltip
+                      content={`${t("beds", { count: property.beds })} · ${t("baths", { count: property.baths })} · ${t("sqft", { count: property.sqft })}`}
+                    />
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-sm text-[#2C7DA0]">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-[#2C7DA0] md:hidden">
+                  <span className="flex min-w-0 items-center gap-1.5">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                      <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    {t("beds", { count: property.beds })}
+                  </span>
+                  <span className="flex min-w-0 items-center gap-1.5">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M9 6l2 2-2 5 3.5 3.5L16 15l2-2" />
+                      <path d="M5 8a7 7 0 0014 0" />
+                    </svg>
+                    {t("baths", { count: property.baths })}
+                  </span>
+                  <span className="break-words text-[#4B5563]">
+                    {t("sqft", { count: property.sqft })}
+                  </span>
+                </div>
+
+                <div className="hidden items-center gap-4 text-sm text-[#2C7DA0] md:flex">
                   <span className="flex items-center gap-1.5">
                     <svg
                       width="14"

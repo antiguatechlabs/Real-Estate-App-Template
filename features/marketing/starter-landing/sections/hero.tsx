@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { Tooltip } from "@/components/ui/tooltip";
+
 import type { BrandConfig } from "../types";
 
 type HeroProps = {
@@ -31,13 +33,14 @@ export function Hero({ brand }: HeroProps) {
             {t("titleEnd", { city: brand.city })}
           </h1>
 
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#4B5563] sm:text-lg">
-            {t("description")}
-          </p>
+          <div className="mt-6 flex min-w-0 max-w-2xl items-start gap-3 text-base leading-relaxed text-[#4B5563] sm:text-lg">
+            <p className="min-w-0 break-words">{t("description")}</p>
+            <Tooltip content={`${t("popularLabel")} ${brand.popularAreas.join(" · ")}`} />
+          </div>
 
-          <div className="mt-10 w-full max-w-4xl rounded-[30px] border border-[#E5E7EB] bg-white/90 p-3 shadow-[0_26px_70px_rgba(18,52,77,0.10)] backdrop-blur-sm">
+          <div className="mt-10 w-full max-w-4xl rounded-2xl border border-[#E5E7EB] bg-white/92 p-3">
             <div className="grid gap-3 lg:grid-cols-[1.3fr_0.8fr_0.8fr_auto]">
-              <label className="flex items-center gap-2 rounded-2xl border border-[#E5E7EB] bg-[#F7F3EC] px-4 py-3">
+              <label className="flex items-center gap-2 rounded-xl border border-[#E5E7EB] bg-[#F7F3EC] px-4 py-3">
                 <svg
                   width="16"
                   height="16"
@@ -56,12 +59,12 @@ export function Hero({ brand }: HeroProps) {
                 <input
                   type="text"
                   placeholder={t("locationPlaceholder")}
-                  className="w-full bg-transparent text-sm text-[#1F2937] outline-none placeholder:text-[#9CA3AF]"
+                  className="min-w-0 w-full bg-transparent text-sm text-[#1F2937] outline-none placeholder:text-[#9CA3AF]"
                 />
               </label>
 
               <select
-                className="cursor-pointer rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#1F2937] outline-none transition-colors duration-200 focus:border-[#2C7DA0] focus-visible:border-[#2C7DA0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
+                className="cursor-pointer rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#1F2937] outline-none transition-colors duration-200 focus:border-[#2C7DA0] focus-visible:border-[#2C7DA0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
                 defaultValue=""
                 aria-label={t("filters.propertyTypeLabel")}
               >
@@ -74,7 +77,7 @@ export function Hero({ brand }: HeroProps) {
               </select>
 
               <select
-                className="cursor-pointer rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#1F2937] outline-none transition-colors duration-200 focus:border-[#2C7DA0] focus-visible:border-[#2C7DA0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
+                className="cursor-pointer rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#1F2937] outline-none transition-colors duration-200 focus:border-[#2C7DA0] focus-visible:border-[#2C7DA0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
                 defaultValue=""
                 aria-label={t("filters.bedsLabel")}
               >
@@ -87,7 +90,7 @@ export function Hero({ brand }: HeroProps) {
                 <option value="4">4+</option>
               </select>
 
-              <button className="flex cursor-pointer items-center justify-center gap-2 rounded-2xl bg-[#12344D] px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0F2A3D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]">
+              <button className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#12344D] px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0F2A3D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]">
                 <svg
                   width="16"
                   height="16"
@@ -105,10 +108,6 @@ export function Hero({ brand }: HeroProps) {
                 {t("search")}
               </button>
             </div>
-
-            <p className="mt-3 text-center text-xs text-[#4B5563]">
-              {t("popularLabel")} {brand.popularAreas.join(" · ")}
-            </p>
           </div>
         </div>
 

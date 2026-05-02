@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { Tooltip } from "@/components/ui/tooltip";
+
 import type { AgentData } from "../types";
 
 type FeaturedAgentsProps = {
@@ -61,6 +63,10 @@ export function FeaturedAgents({ agents }: FeaturedAgentsProps) {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-6 flex justify-end">
+          <Tooltip content={t("description")} />
         </div>
       </div>
     </section>

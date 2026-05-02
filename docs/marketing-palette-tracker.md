@@ -11,6 +11,7 @@
 - Featured Agents [x]
 - CTA Banner [x]
 - Footer [x]
+- Revision minimal mobile-first [x]
 
 ## Objetivo
 Centralizar el seguimiento de la migración visual de la landing pública de `(marketing)` hacia la nueva paleta definida en [docs/real-estate-palette-implementation-guide.md](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/docs/real-estate-palette-implementation-guide.md).
@@ -18,6 +19,7 @@ Centralizar el seguimiento de la migración visual de la landing pública de `(m
 Este tracker debe servir como guía de implementación y control de avance para:
 - la base visual compartida de marketing
 - cada sección renderizada por [LandingPage.tsx](/Users/ign/Desktop/Projects/Antigua Tech Labs/real-estate-app-template/features/marketing/starter-landing/LandingPage.tsx)
+- la revisión minimalista mobile-first de texto, radios, sombras y ayudas contextuales
 
 Alcance confirmado:
 - base visual compartida
@@ -42,6 +44,8 @@ Reglas globales de aplicación:
 - La landing de marketing debe abandonar la dependencia actual del tema oscuro basado en `slate` y acentos fríos tipo `sky/blue`.
 - Navbar, footer y un bloque CTA final pueden conservar una presencia más oscura o más densa solo si usan la nueva jerarquía cromática.
 - La fotografía inmobiliaria debe recuperar protagonismo frente a gradientes abstractos y fondos oscuros pesados.
+- La UI debe ser mobile-first, limpia y con copy visible reducido; las explicaciones secundarias deben vivir en tooltips accesibles cuando no sean críticas.
+- Evitar radios excesivos, sombras pesadas y bloques de texto largos en cards o secciones operativas.
 
 ## Tokens objetivo
 | Token | Valor | Uso principal |
@@ -82,6 +86,7 @@ Reglas de implementación:
 | Featured Agents | `features/marketing/starter-landing/sections/featured-agents.tsx` | Hecho | Media | Por asignar | 2026-04-18 | Rehecho para evitar look SaaS oscuro |
 | CTA Banner | `features/marketing/starter-landing/sections/cta-banner.tsx` | Hecho | Alta | Por asignar | 2026-04-18 | Bloque final reforzado con paleta premium |
 | Footer | `features/marketing/starter-landing/sections/footer.tsx` | Hecho | Media | Por asignar | 2026-04-18 | Base `primary` y contraste refinado |
+| Revision minimal mobile-first | `features/marketing/starter-landing/**`, `components/ui/tooltip.tsx`, `app/(marketing)/[locale]/not-found.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Copy secundario reducido, tooltips agregados, radios/sombras suavizados y base clara corregida |
 
 ## Detalle por bloque
 ### Base visual compartida

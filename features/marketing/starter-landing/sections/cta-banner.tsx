@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { Tooltip } from "@/components/ui/tooltip";
+
 import type { BrandConfig } from "../types";
 
 type CTABannerProps = {
@@ -63,6 +65,10 @@ export function CTABanner({ brand }: CTABannerProps) {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="relative mx-auto mt-4 flex max-w-6xl justify-end">
+        <Tooltip content={t("disclaimer")} />
       </div>
     </section>
   );
