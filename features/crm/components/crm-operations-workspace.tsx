@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
+import type { AppLocale } from "@/i18n/locale";
 
 import {
   fallbackCatalogs,
@@ -13,6 +14,7 @@ import {
 } from "../data/crm-api-fallback";
 import { crmBffClient, CrmBffError } from "../services/bff-client";
 import { useCrmLots, useCrmMutations, useCrmOverview } from "../hooks/use-crm-data";
+import { crmCopy } from "../lib/crm-locale";
 import type { Lot, Project } from "../types/api";
 
 function formatCurrency(value: number | null | undefined, currency = "GTQ") {
@@ -39,21 +41,31 @@ function getErrorMessage(error: unknown) {
   return "Sin conexión al BFF.";
 }
 
-function SyncState({ error, isLoading }: { error: unknown; isLoading: boolean }) {
+function SyncState({
+  error,
+  isLoading,
+  locale,
+}: {
+  error: unknown;
+  isLoading: boolean;
+  locale: AppLocale;
+}) {
+  const copy = crmCopy[locale].operations;
+
   if (isLoading) {
-    return <span className="text-[#74776F]">Sincronizando</span>;
+    return <span className="text-[#74776F]">{copy.syncing}</span>;
   }
 
   if (error) {
     return (
       <span className="inline-flex items-center gap-2 text-[#9F2F2D]">
-        Fallback local
+        {copy.fallbackLocal}
         <Tooltip content={getErrorMessage(error)} />
       </span>
     );
   }
 
-  return <span className="text-[#346538]">API conectada</span>;
+  return <span className="text-[#346538]">{copy.apiConnected}</span>;
 }
 
 function Metric({
@@ -66,12 +78,12 @@ function Metric({
   note: string;
 }) {
   return (
-    <article className="flex items-start justify-between gap-4 border-t border-[#E5E1D8] py-4">
-      <div>
+    <article className="flex min-w-0 items-start justify-between gap-4 border-t border-[#E5E1D8] py-4">
+      <div className="min-w-0">
         <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#74776F]">
           {label}
         </p>
-        <p className="mt-1 text-2xl font-semibold tracking-tight text-[#111111]">
+        <p className="mt-1 break-words text-2xl font-semibold tracking-tight text-[#111111]">
           {value}
         </p>
       </div>
@@ -84,9 +96,14 @@ function LotCard({
   currency,
   lot,
   onHold,
+  labels,
   onRelease,
 }: {
   currency: string;
+  labels: {
+    block: string;
+    release: string;
+  };
   lot: Lot;
   onHold: (lotId: number) => void;
   onRelease: (lotId: number) => void;
@@ -95,9 +112,9 @@ function LotCard({
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-[#E5E1D8] bg-[#FBFAF7]">
-      <div className="flex items-start justify-between gap-4 p-5">
-        <div>
-          <p className="text-xl font-semibold tracking-tight text-[#111111]">
+      <div className="flex min-w-0 items-start justify-between gap-4 p-5">
+        <div className="min-w-0">
+          <p className="break-words text-xl font-semibold tracking-tight text-[#111111]">
             {lot.name}
           </p>
           <p className="mt-1 text-sm text-[#5E625C]">
@@ -108,13 +125,15 @@ function LotCard({
           {status}
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-px bg-[#E5E1D8]">
+      <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-px bg-[#E5E1D8]">
         {Object.entries(lot.fields).slice(0, 4).map(([key, value]) => (
-          <div key={key} className="bg-white p-3">
-            <p className="text-[11px] uppercase tracking-[0.16em] text-[#74776F]">
+          <div key={key} className="min-w-0 bg-white p-3">
+            <p className="break-words text-[11px] uppercase tracking-[0.12em] text-[#74776F]">
               {key}
             </p>
-            <p className="mt-1 text-sm font-semibold text-[#111111]">{String(value)}</p>
+            <p className="mt-1 break-words text-sm font-semibold text-[#111111]">
+              {String(value)}
+            </p>
           </div>
         ))}
       </div>
@@ -122,23 +141,25 @@ function LotCard({
         <button
           type="button"
           onClick={() => onHold(lot.id)}
-          className="flex-1 rounded-md border border-[#D8D2C8] bg-white px-3 py-2 text-sm font-semibold text-[#111111] transition-colors hover:border-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
+          className="flex-1 rounded-md border border-[#D8D2C8] bg-white px-3 py-2 text-sm font-semibold !text-[#111111] transition-colors hover:border-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0] [&_*]:!text-[#111111]"
         >
-          Bloquear
+          {labels.block}
         </button>
         <button
           type="button"
           onClick={() => onRelease(lot.id)}
-          className="flex-1 rounded-md border border-[#111111] bg-[#111111] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#333333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
+          className="flex-1 rounded-md border border-[#111111] bg-[#111111] px-3 py-2 text-sm font-semibold !text-white transition-colors hover:bg-[#333333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0] [&_*]:!text-white"
         >
-          Liberar
+          {labels.release}
         </button>
       </div>
     </article>
   );
 }
 
-export function CrmOperationsWorkspace() {
+export function CrmOperationsWorkspace({ locale }: { locale: AppLocale }) {
+  const copy = crmCopy[locale].operations;
+  const actionCopy = crmCopy[locale].actions;
   const overview = useCrmOverview();
   const mutations = useCrmMutations();
   const [projectId, setProjectId] = useState<number | undefined>(undefined);
@@ -198,8 +219,8 @@ export function CrmOperationsWorkspace() {
         onSuccess: (result) => {
           setImportResult(
             result.can_import
-              ? `${result.will_create} filas listas para importar.`
-              : `${result.rows.invalid} filas requieren revisión.`,
+              ? copy.importReady(result.will_create)
+              : copy.importReview(result.rows.invalid),
           );
         },
       },
@@ -222,26 +243,29 @@ export function CrmOperationsWorkspace() {
       className="mx-auto w-full max-w-7xl py-24 md:py-36"
     >
       <div className="mb-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-        <div>
+        <div className="min-w-0">
           <h2 className="max-w-6xl text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.96] tracking-[-0.055em] text-[#111111]">
-            CRM conectado para operar lotes, catálogos e importación.
+            {copy.title}
           </h2>
           <p className="mt-5 max-w-2xl text-sm leading-6 text-[#5E625C] md:text-base">
-            Si la API no está configurada, la pantalla mantiene fallback local y muestra
-            el error exacto en tooltip.
+            {copy.subtitle}
           </p>
         </div>
         <div className="rounded-xl border border-[#E5E1D8] bg-[#FBFAF7] px-4 py-3 text-sm font-semibold">
-          <SyncState error={hasConnectionError} isLoading={overview.company.isLoading} />
+          <SyncState
+            error={hasConnectionError}
+            isLoading={overview.company.isLoading}
+            locale={locale}
+          />
         </div>
       </div>
 
       <div className="grid grid-flow-dense gap-px overflow-hidden rounded-2xl border border-[#E5E1D8] bg-[#E5E1D8] md:grid-cols-12">
-        <article className="bg-[#FBFAF7] p-5 md:col-span-6 md:p-7">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-sm font-medium text-[#74776F]">Empresa</p>
-              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-[#111111]">
+        <article className="min-w-0 bg-[#FBFAF7] p-5 md:col-span-6 md:p-7">
+          <div className="flex min-w-0 items-start justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-[#74776F]">{copy.company}</p>
+              <h3 className="mt-2 break-words text-3xl font-semibold tracking-tight text-[#111111]">
                 {company.name}
               </h3>
             </div>
@@ -249,29 +273,29 @@ export function CrmOperationsWorkspace() {
           </div>
           <div className="mt-8 grid gap-0 md:grid-cols-3 md:gap-5">
             <Metric
-              label="Moneda"
+              label={copy.currency}
               note="Se usa para lotes, reservas y financiamiento."
               value={currency}
             />
             <Metric
-              label="Zona"
+              label={copy.timezone}
               note="Controla fechas de sesión, holds e importación."
               value={company.settings?.timezone ?? "N/D"}
             />
             <Metric
-              label="Idioma"
+              label={copy.language}
               note="Base para mensajes y catálogos localizados."
               value={company.settings?.default_language ?? "es"}
             />
           </div>
         </article>
 
-        <article className="bg-white p-5 md:col-span-6 md:p-7">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-sm font-medium text-[#74776F]">Proyectos</p>
-              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-[#111111]">
-                {projects.length} activos
+        <article className="min-w-0 bg-white p-5 md:col-span-6 md:p-7">
+          <div className="flex min-w-0 items-start justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-[#74776F]">{copy.projects}</p>
+              <h3 className="mt-2 break-words text-3xl font-semibold tracking-tight text-[#111111]">
+                {projects.length} {copy.activeProjects}
               </h3>
             </div>
             <Tooltip content="Selecciona un proyecto para filtrar lotes e importación." />
@@ -282,17 +306,21 @@ export function CrmOperationsWorkspace() {
                 key={project.id}
                 type="button"
                 onClick={() => setProjectId(project.id)}
-                className={`flex items-center justify-between rounded-lg border px-4 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0] ${
+                className={`flex min-w-0 items-center justify-between gap-3 rounded-lg border px-4 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0] ${
                   selectedProject?.id === project.id
-                    ? "border-[#111111] bg-[#111111] text-white"
-                    : "border-[#E5E1D8] bg-[#FBFAF7] text-[#111111] hover:border-[#111111]"
+                    ? "border-[#111111] bg-[#111111] !text-white [&_*]:!text-white"
+                    : "border-[#E5E1D8] bg-[#FBFAF7] !text-[#111111] hover:border-[#111111] [&_*]:!text-[#111111]"
                 }`}
               >
-                <span>
-                  <span className="block text-sm font-semibold">{project.name}</span>
-                  <span className="block text-xs opacity-70">{project.code}</span>
+                <span className="min-w-0">
+                  <span className="block break-words text-sm font-semibold">
+                    {project.name}
+                  </span>
+                  <span className="block break-words text-xs opacity-70">
+                    {project.code}
+                  </span>
                 </span>
-                <span className="text-xs font-semibold uppercase tracking-[0.14em]">
+                <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.14em]">
                   {project.status}
                 </span>
               </button>
@@ -300,33 +328,37 @@ export function CrmOperationsWorkspace() {
           </div>
         </article>
 
-        <article className="bg-white p-5 md:col-span-4 md:p-7">
-          <p className="text-sm font-medium text-[#74776F]">Catálogos</p>
+        <article className="min-w-0 bg-white p-5 md:col-span-4 md:p-7">
+          <p className="text-sm font-medium text-[#74776F]">{copy.catalogs}</p>
           <div className="mt-5 space-y-3">
             {[
-              ["Lotes", catalogs.lot_statuses.length],
+              [actionCopy.lots, catalogs.lot_statuses.length],
               ["Negocios", catalogs.deal_statuses.length],
               ["Reservas", catalogs.reservation_statuses.length],
               ["Pagos", catalogs.payment_statuses.length],
             ].map(([label, value]) => (
               <div
                 key={label}
-                className="flex items-center justify-between border-t border-[#E5E1D8] pt-3"
+                className="flex min-w-0 items-center justify-between gap-3 border-t border-[#E5E1D8] pt-3"
               >
-                <span className="text-sm text-[#5E625C]">{label}</span>
-                <span className="text-lg font-semibold text-[#111111]">{value}</span>
+                <span className="min-w-0 break-words text-sm text-[#5E625C]">
+                  {label}
+                </span>
+                <span className="shrink-0 text-lg font-semibold text-[#111111]">
+                  {value}
+                </span>
               </div>
             ))}
           </div>
         </article>
 
-        <article className="bg-[#FBFAF7] p-5 md:col-span-4 md:p-7">
-          <p className="text-sm font-medium text-[#74776F]">Campos de lote</p>
+        <article className="min-w-0 bg-[#FBFAF7] p-5 md:col-span-4 md:p-7">
+          <p className="text-sm font-medium text-[#74776F]">{copy.fields}</p>
           <div className="mt-5 flex flex-wrap gap-2">
             {lotFields.map((field) => (
               <span
                 key={field.code}
-                className="rounded-md border border-[#E5E1D8] bg-white px-3 py-2 text-sm font-medium text-[#111111]"
+                className="max-w-full break-words rounded-md border border-[#E5E1D8] bg-white px-3 py-2 text-sm font-medium text-[#111111]"
               >
                 {field.label}
               </span>
@@ -334,18 +366,18 @@ export function CrmOperationsWorkspace() {
           </div>
         </article>
 
-        <article className="bg-white p-5 md:col-span-4 md:p-7">
-          <p className="text-sm font-medium text-[#74776F]">Crear lote</p>
+        <article className="min-w-0 bg-white p-5 md:col-span-4 md:p-7">
+          <p className="text-sm font-medium text-[#74776F]">{copy.createLot}</p>
           <form className="mt-5 space-y-3" onSubmit={createLot}>
             <input
               name="name"
-              placeholder="Nombre del lote"
+              placeholder={copy.lotName}
               className="w-full rounded-lg border border-[#D8D2C8] bg-[#FBFAF7] px-3 py-3 text-sm outline-none focus:border-[#2C7DA0]"
             />
             <div className="grid grid-cols-2 gap-2">
               <input
                 name="base_price"
-                placeholder="Precio"
+                placeholder={copy.price}
                 type="number"
                 className="w-full rounded-lg border border-[#D8D2C8] bg-[#FBFAF7] px-3 py-3 text-sm outline-none focus:border-[#2C7DA0]"
               />
@@ -358,36 +390,40 @@ export function CrmOperationsWorkspace() {
             </div>
             <button
               type="submit"
-              className="w-full rounded-md border border-[#111111] bg-[#111111] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#333333]"
+              className="w-full rounded-md border border-[#111111] bg-[#111111] px-4 py-3 text-sm font-semibold !text-white transition-colors hover:bg-[#333333] [&_*]:!text-white"
             >
-              Crear lote
+              {actionCopy.createLot}
             </button>
           </form>
         </article>
       </div>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-[1fr_360px]">
+      <div className="mt-8 grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div>
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row">
+          <div className="mb-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Buscar lote"
-              className="min-h-11 flex-1 rounded-lg border border-[#D8D2C8] bg-white px-4 text-sm outline-none focus:border-[#2C7DA0]"
+              placeholder={copy.searchLot}
+              className="min-h-11 min-w-0 rounded-lg border border-[#D8D2C8] bg-white px-4 text-sm !text-[#111111] outline-none placeholder:text-[#8A8D85] focus:border-[#2C7DA0]"
             />
             <button
               type="button"
               onClick={() => setProjectId(undefined)}
-              className="rounded-md border border-[#D8D2C8] bg-[#FBFAF7] px-4 py-2 text-sm font-semibold text-[#111111] hover:border-[#111111]"
+              className="min-h-11 rounded-md border border-[#D8D2C8] bg-[#FBFAF7] px-4 py-2 text-sm font-semibold !text-[#111111] hover:border-[#111111] [&_*]:!text-[#111111]"
             >
-              Ver todos
+              {actionCopy.allLots}
             </button>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
             {lots.map((lot) => (
               <LotCard
                 key={lot.id}
                 currency={currency}
+                labels={{
+                  block: actionCopy.block,
+                  release: actionCopy.release,
+                }}
                 lot={lot}
                 onHold={(lotId) => mutations.holdLot.mutate(lotId)}
                 onRelease={(lotId) => mutations.releaseLot.mutate(lotId)}
@@ -397,9 +433,9 @@ export function CrmOperationsWorkspace() {
         </div>
 
         <aside className="rounded-2xl border border-[#E5E1D8] bg-[#111111] p-5 text-white">
-          <p className="text-sm font-medium text-white/60">Importación</p>
+          <p className="text-sm font-medium text-white/60">{copy.import}</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-            Plantilla, validación y carga.
+            {copy.importTitle}
           </h3>
           <form className="mt-6 space-y-3" onSubmit={importLots}>
             <input
@@ -410,16 +446,16 @@ export function CrmOperationsWorkspace() {
             />
             <button
               type="submit"
-              className="w-full rounded-md border border-white bg-white px-4 py-3 text-sm font-semibold text-[#111111] transition-colors hover:bg-[#F7F6F2]"
+              className="w-full rounded-md border border-white bg-white px-4 py-3 text-sm font-semibold !text-[#111111] transition-colors hover:bg-[#F7F6F2] [&_*]:!text-[#111111]"
             >
-              Validar archivo
+              {actionCopy.validateFile}
             </button>
             <button
               type="button"
               onClick={() => void downloadTemplate()}
-              className="w-full rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="w-full rounded-md border border-white/20 bg-transparent px-4 py-3 text-sm font-semibold !text-white transition-colors hover:bg-white/10 [&_*]:!text-white"
             >
-              Descargar plantilla
+              {actionCopy.downloadTemplate}
             </button>
           </form>
           {(importResult || mutations.validateImport.error) && (

@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 
 import { CrmSubpageFrame } from "@/features/crm/components/crm-subpage-frame";
 import { crmDailySignals } from "@/features/crm/data/crm-content";
+import {
+  CRM_LOCALE_COOKIE,
+  crmCopy,
+  resolveCrmLocale,
+} from "@/features/crm/lib/crm-locale";
 
 export const metadata: Metadata = {
   title: "CRM Admin",
@@ -9,17 +15,21 @@ export const metadata: Metadata = {
     "Zona de administración interna para permisos, estructura y gobierno del tenant.",
 };
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const cookieStore = await cookies();
+  const locale = resolveCrmLocale(cookieStore.get(CRM_LOCALE_COOKIE)?.value);
+  const copy = crmCopy[locale].admin;
+
   return (
     <CrmSubpageFrame
-      eyebrow="Administración"
-      title="Gobierno del CRM"
-      description="Base preparada para permisos, flujos internos y control de la experiencia operativa sin ensuciar la pantalla principal."
+      eyebrow={copy.eyebrow}
+      title={copy.title}
+      description={copy.description}
       highlights={crmDailySignals}
       primaryHref="/app/config"
-      primaryLabel="Ir a configuración"
+      primaryLabel={copy.primary}
       secondaryHref="/app"
-      secondaryLabel="Volver al panel"
+      secondaryLabel={copy.secondary}
     />
   );
 }

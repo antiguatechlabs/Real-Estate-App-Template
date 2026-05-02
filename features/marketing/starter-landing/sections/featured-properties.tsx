@@ -67,10 +67,14 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
 
               <div className="space-y-4 p-5 md:p-6">
                 <div>
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="font-semibold text-[#12344D]">{property.address}</p>
-                      <p className="text-sm text-[#4B5563]">{property.city}</p>
+                  <div className="flex min-w-0 items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="break-words font-semibold text-[#12344D]">
+                        {property.address}
+                      </p>
+                      <p className="break-words text-sm text-[#4B5563]">
+                        {property.city}
+                      </p>
                     </div>
                     <Tooltip
                       content={`${t("beds", { count: property.beds })} · ${t("baths", { count: property.baths })} · ${t("sqft", { count: property.sqft })}`}
@@ -78,8 +82,8 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-sm text-[#2C7DA0] md:hidden">
-                  <span className="flex items-center gap-1.5">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-[#2C7DA0] md:hidden">
+                  <span className="flex min-w-0 items-center gap-1.5">
                     <svg
                       width="14"
                       height="14"
@@ -96,7 +100,7 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
                     </svg>
                     {t("beds", { count: property.beds })}
                   </span>
-                  <span className="flex items-center gap-1.5">
+                  <span className="flex min-w-0 items-center gap-1.5">
                     <svg
                       width="14"
                       height="14"
@@ -113,7 +117,9 @@ export function FeaturedProperties({ properties }: FeaturedPropertiesProps) {
                     </svg>
                     {t("baths", { count: property.baths })}
                   </span>
-                  <span className="text-[#4B5563]">{t("sqft", { count: property.sqft })}</span>
+                  <span className="break-words text-[#4B5563]">
+                    {t("sqft", { count: property.sqft })}
+                  </span>
                 </div>
 
                 <button className="w-full cursor-pointer rounded-lg border border-[#D1D5DB] bg-[#F7F3EC] py-3 text-center text-sm font-semibold text-[#12344D] transition-colors duration-200 hover:border-[#D4A373] hover:bg-[#EFE8DD] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]">

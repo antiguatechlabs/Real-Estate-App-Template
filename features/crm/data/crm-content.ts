@@ -1,6 +1,7 @@
 export type CrmNavLink = {
   label: string;
   href: string;
+  key: "configuracion" | "empresa" | "lotes" | "operacion" | "resumen";
 };
 
 export type CrmProject = {
@@ -37,11 +38,11 @@ export type CrmTestimonial = {
 };
 
 export const crmNavLinks: CrmNavLink[] = [
-  { label: "Resumen", href: "#resumen" },
-  { label: "Proyectos", href: "#empresa" },
-  { label: "Lotes", href: "#lotes" },
-  { label: "Operación", href: "#operacion" },
-  { label: "Configuración", href: "#configuracion" },
+  { key: "resumen", label: "Resumen", href: "#resumen" },
+  { key: "empresa", label: "Proyectos", href: "#empresa" },
+  { key: "lotes", label: "Lotes", href: "#lotes" },
+  { key: "operacion", label: "Operación", href: "#operacion" },
+  { key: "configuracion", label: "Configuración", href: "#configuracion" },
 ];
 
 export const crmProjects: CrmProject[] = [

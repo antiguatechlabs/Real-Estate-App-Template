@@ -22,7 +22,7 @@ export function CTABanner({ brand }: CTABannerProps) {
         </div>
 
         <div className="relative grid gap-10 px-6 py-12 md:grid-cols-[1.15fr_0.85fr] md:items-center md:px-12 md:py-16">
-          <div className="max-w-2xl">
+          <div className="min-w-0 max-w-2xl">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-white/70">
               {brand.agencyName}
             </p>
@@ -30,8 +30,10 @@ export function CTABanner({ brand }: CTABannerProps) {
               {t("titleStart")}{" "}
               <span className="text-[#D4A373]">{t("titleAccent")}</span>
             </h2>
-            <div className="mt-5 flex items-start gap-3 text-base leading-relaxed text-white/75 sm:text-lg">
-              <p>{t("description", { agencyName: brand.agencyName })}</p>
+            <div className="mt-5 flex min-w-0 items-start gap-3 text-base leading-relaxed text-white/75 sm:text-lg">
+              <p className="min-w-0 break-words">
+                {t("description", { agencyName: brand.agencyName })}
+              </p>
               <Tooltip content="Listings, leads and follow-up stay in one focused flow." />
             </div>
           </div>

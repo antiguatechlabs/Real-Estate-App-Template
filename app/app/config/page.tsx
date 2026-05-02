@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 
 import { CrmSubpageFrame } from "@/features/crm/components/crm-subpage-frame";
 import { crmCompanyFacts } from "@/features/crm/data/crm-content";
+import {
+  CRM_LOCALE_COOKIE,
+  crmCopy,
+  resolveCrmLocale,
+} from "@/features/crm/lib/crm-locale";
 
 export const metadata: Metadata = {
   title: "CRM Configuración",
@@ -9,17 +15,21 @@ export const metadata: Metadata = {
     "Zona de configuración del CRM para moneda, zona horaria y reglas por tenant.",
 };
 
-export default function ConfigPage() {
+export default async function ConfigPage() {
+  const cookieStore = await cookies();
+  const locale = resolveCrmLocale(cookieStore.get(CRM_LOCALE_COOKIE)?.value);
+  const copy = crmCopy[locale].config;
+
   return (
     <CrmSubpageFrame
-      eyebrow="Configuración"
-      title="Ajustes del tenant"
-      description="Espacio listo para company settings, catálogos y reglas que definen cómo opera el equipo en producción."
+      eyebrow={copy.eyebrow}
+      title={copy.title}
+      description={copy.description}
       highlights={crmCompanyFacts}
       primaryHref="/app/admin"
-      primaryLabel="Ir a admin"
+      primaryLabel={copy.primary}
       secondaryHref="/app"
-      secondaryLabel="Volver al panel"
+      secondaryLabel={copy.secondary}
     />
   );
 }

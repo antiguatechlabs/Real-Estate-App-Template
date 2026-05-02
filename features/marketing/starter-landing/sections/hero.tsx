@@ -32,8 +32,8 @@ export function Hero({ brand }: HeroProps) {
             {t("titleEnd", { city: brand.city })}
           </h1>
 
-          <div className="mt-6 flex max-w-2xl items-start gap-3 text-base leading-relaxed text-[#4B5563] sm:text-lg">
-            <p>{t("description")}</p>
+          <div className="mt-6 flex min-w-0 max-w-2xl items-start gap-3 text-base leading-relaxed text-[#4B5563] sm:text-lg">
+            <p className="min-w-0 break-words">{t("description")}</p>
             <Tooltip content={`${t("popularLabel")} ${brand.popularAreas.join(" · ")}`} />
           </div>
 
@@ -58,7 +58,7 @@ export function Hero({ brand }: HeroProps) {
                 <input
                   type="text"
                   placeholder={t("locationPlaceholder")}
-                  className="w-full bg-transparent text-sm text-[#1F2937] outline-none placeholder:text-[#9CA3AF]"
+                  className="min-w-0 w-full bg-transparent text-sm text-[#1F2937] outline-none placeholder:text-[#9CA3AF]"
                 />
               </label>
 

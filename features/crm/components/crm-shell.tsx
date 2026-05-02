@@ -7,7 +7,9 @@ import Link from "next/link";
 import { useRef, type ReactNode } from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
+import type { AppLocale } from "@/i18n/locale";
 
+import { CrmLocaleSwitcher } from "./crm-locale-switcher";
 import { CrmOperationsWorkspace } from "./crm-operations-workspace";
 import {
   crmCatalogs,
@@ -19,6 +21,7 @@ import {
   crmStackCards,
   crmTestimonials,
 } from "../data/crm-content";
+import { crmCopy } from "../lib/crm-locale";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,8 +38,8 @@ function ShellButton({
     "inline-flex min-h-11 items-center justify-center rounded-md px-4 py-2.5 text-sm font-semibold transition-transform duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0] active:scale-[0.98]";
   const styles =
     variant === "primary"
-      ? "border border-[#111111] bg-[#111111] text-white hover:bg-[#333333]"
-      : "border border-[#D8D2C8] bg-[#FBFAF7] text-[#111111] hover:border-[#111111]";
+      ? "border border-[#111111] bg-[#111111] !text-white hover:bg-[#333333] [&_*]:!text-white"
+      : "border border-[#D8D2C8] bg-[#FBFAF7] !text-[#111111] hover:border-[#111111] [&_*]:!text-[#111111]";
 
   return (
     <Link className={`${base} ${styles}`} href={href}>
@@ -72,11 +75,11 @@ function SectionHeading({
 }) {
   return (
     <div className="flex max-w-5xl flex-col gap-4 md:flex-row md:items-end md:justify-between">
-      <h2 className="max-w-4xl text-[clamp(2rem,4vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-[#111111]">
+      <h2 className="min-w-0 max-w-4xl break-words text-[clamp(2rem,4vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-[#111111]">
         {title}
       </h2>
       {(description || tooltip) && (
-        <div className="flex max-w-sm items-start gap-3 text-sm leading-6 text-[#5E625C]">
+        <div className="flex min-w-0 max-w-sm items-start gap-3 text-sm leading-6 text-[#5E625C]">
           {description && <p>{description}</p>}
           {tooltip && <Tooltip content={tooltip} />}
         </div>
@@ -95,12 +98,12 @@ function FactCard({
   note: string;
 }) {
   return (
-    <article className="flex items-start justify-between gap-4 border-t border-[#E5E1D8] py-4">
-      <div>
+    <article className="flex min-w-0 items-start justify-between gap-4 border-t border-[#E5E1D8] py-4">
+      <div className="min-w-0">
         <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#74776F]">
           {label}
         </p>
-        <p className="mt-1 text-xl font-semibold tracking-tight text-[#111111]">
+        <p className="mt-1 break-words text-xl font-semibold tracking-tight text-[#111111]">
           {value}
         </p>
       </div>
@@ -111,24 +114,24 @@ function FactCard({
 
 function ProjectAccordion() {
   return (
-    <div className="flex flex-col gap-px overflow-hidden rounded-xl border border-[#E5E1D8] bg-[#E5E1D8] md:h-full md:flex-row">
+    <div className="grid gap-px overflow-hidden rounded-xl border border-[#E5E1D8] bg-[#E5E1D8]">
       {crmProjects.map((project) => (
         <article
           key={project.code}
-          className="group flex min-h-[150px] flex-1 flex-col justify-between overflow-hidden bg-[#FBFAF7] p-5 transition-[flex,background-color] duration-500 ease-out hover:bg-white md:hover:flex-[2]"
+          className="group min-w-0 bg-[#FBFAF7] p-4 transition-colors duration-300 hover:bg-white"
         >
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-lg font-semibold tracking-tight text-[#111111]">
+          <div className="flex min-w-0 items-start justify-between gap-4">
+            <div className="min-w-0">
+              <p className="break-words text-lg font-semibold tracking-tight text-[#111111]">
                 {project.name}
               </p>
-              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#74776F]">
+              <p className="mt-1 break-words text-xs uppercase tracking-[0.14em] text-[#74776F]">
                 {project.code}
               </p>
             </div>
             <Tooltip content={project.note} />
           </div>
-          <div>
+          <div className="mt-4">
             <div className="h-1.5 overflow-hidden rounded-full bg-[#ECE7DE]">
               <div
                 className="h-full rounded-full bg-[#111111] transition-all duration-700 group-hover:bg-[#D4A373]"
@@ -143,7 +146,8 @@ function ProjectAccordion() {
   );
 }
 
-export function CrmShell() {
+export function CrmShell({ locale }: { locale: AppLocale }) {
+  const copy = crmCopy[locale];
   const rootRef = useRef<HTMLElement | null>(null);
   const imageRefs = useRef<(HTMLElement | null)[]>([]);
   const revealRef = useRef<HTMLElement | null>(null);
@@ -209,9 +213,9 @@ export function CrmShell() {
               className="h-9 w-9 rounded-lg border border-[#E5E1D8] bg-cover bg-center"
               style={{ backgroundImage: backgroundImage("minimal-crm-mark") }}
             />
-            <span>
+            <span className="min-w-0">
               <span className="block text-sm font-semibold tracking-tight">
-                Control Hub
+                {copy.nav.controlHub}
               </span>
               <span className="block text-xs text-[#74776F]">MERCAFARMA</span>
             </span>
@@ -224,19 +228,20 @@ export function CrmShell() {
                 href={link.href}
                 className="transition-colors duration-200 hover:text-[#111111]"
               >
-                {link.label}
+                {copy.nav.links[link.key]}
               </Link>
             ))}
           </div>
 
           <div className="flex items-center gap-2">
+            <CrmLocaleSwitcher label={copy.locale.label} locale={locale} />
             <Link
               href="/app/config"
-              className="hidden rounded-md border border-[#D8D2C8] bg-white px-3 py-2 text-sm font-medium text-[#111111] transition-colors hover:border-[#111111] sm:inline-flex"
+              className="hidden rounded-md border border-[#D8D2C8] bg-white px-3 py-2 text-sm font-medium !text-[#111111] transition-colors hover:border-[#111111] sm:inline-flex [&_*]:!text-[#111111]"
             >
-              Config
+              {copy.nav.config}
             </Link>
-            <ShellButton href="#lotes">Lotes</ShellButton>
+            <ShellButton href="#lotes">{copy.actions.lots}</ShellButton>
           </div>
         </nav>
       </header>
@@ -247,22 +252,21 @@ export function CrmShell() {
       >
         <div className="flex flex-col justify-center">
           <h1 className="max-w-6xl text-[clamp(2.75rem,6vw,5.5rem)] font-semibold leading-[0.92] tracking-[-0.06em] text-[#111111]">
-            Opera lotes{" "}
+            {copy.shell.heroTitle.split(" lotes ")[0]}{" "}
             <span
               aria-hidden="true"
               className="mx-1 inline-block h-[0.72em] w-24 translate-y-1 rounded-lg bg-cover bg-center align-middle grayscale md:w-32"
               style={{ backgroundImage: backgroundImage("quiet-real-estate-ops") }}
             />{" "}
-            con menos pantalla y más foco.
+            {locale === "es" ? "lotes con menos pantalla y más foco." : "lots with less screen and more focus."}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-[#5E625C] md:text-lg">
-            Empresa, proyectos y acciones críticas en una vista clara. El detalle vive en
-            ayudas contextuales, no en bloques largos.
+            {copy.shell.heroBody}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ShellButton href="#empresa">Entrar al panel</ShellButton>
+            <ShellButton href="#empresa">{copy.actions.enterPanel}</ShellButton>
             <ShellButton href="#lotes" variant="secondary">
-              Ver flujo de lotes
+              {copy.actions.viewFlow}
             </ShellButton>
           </div>
         </div>
@@ -279,12 +283,14 @@ export function CrmShell() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.22),transparent_26%),linear-gradient(180deg,rgba(17,17,17,0.05),rgba(17,17,17,0.58))]" />
           <div className="absolute bottom-0 left-0 right-0 p-5">
             <div className="rounded-xl border border-white/20 bg-[#FBFAF7]/92 p-4 backdrop-blur">
-              <div className="flex items-center justify-between gap-4">
-                <div>
+              <div className="flex min-w-0 items-center justify-between gap-4">
+                <div className="min-w-0">
                   <p className="text-sm font-semibold text-[#111111]">
-                    Sesión protegida
+                    {copy.shell.sessionProtected}
                   </p>
-                  <p className="mt-1 text-sm text-[#5E625C]">Tenant estable vía BFF.</p>
+                  <p className="mt-1 text-sm text-[#5E625C]">
+                    {copy.shell.tenantStable}
+                  </p>
                 </div>
                 <Tooltip content="La cookie httpOnly y el header tenant-aware se resuelven fuera del navegador." />
               </div>
@@ -298,18 +304,20 @@ export function CrmShell() {
         className="mx-auto w-full max-w-7xl py-24 md:py-36"
       >
         <SectionHeading
-          title="La operación diaria cabe en tres bloques."
-          description="Solo lo visible para decidir. Lo explicativo queda bajo demanda."
+          title={copy.shell.sectionTitle}
+          description={copy.shell.sectionBody}
           tooltip="Esta sección reemplaza el dashboard denso por lectura progresiva: dato, estado y acción."
         />
 
-        <div className="mt-10 grid grid-flow-dense gap-px overflow-hidden rounded-2xl border border-[#E5E1D8] bg-[#E5E1D8] md:grid-cols-12 md:auto-rows-[210px]">
-          <article className="bg-[#FBFAF7] p-5 md:col-span-7 md:row-span-2 md:p-7">
+        <div className="mt-10 grid grid-flow-dense gap-px overflow-hidden rounded-2xl border border-[#E5E1D8] bg-[#E5E1D8] lg:grid-cols-12 lg:auto-rows-[auto] xl:auto-rows-[230px]">
+          <article className="min-w-0 bg-[#FBFAF7] p-5 lg:col-span-7 lg:row-span-2 lg:p-7">
             <div className="flex h-full flex-col justify-between gap-8">
-              <div className="grid gap-6 md:grid-cols-[1fr_220px]">
-                <div>
-                  <p className="text-sm font-medium text-[#74776F]">Empresa actual</p>
-                  <h3 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-[#111111] md:text-5xl">
+              <div className="grid gap-6 xl:grid-cols-[minmax(280px,1fr)_240px]">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-[#74776F]">
+                    {copy.shell.companyCurrent}
+                  </p>
+                  <h3 className="mt-2 break-words text-[clamp(2.5rem,7vw,4.75rem)] font-semibold leading-[0.9] tracking-[-0.055em] text-[#111111] xl:text-[clamp(3rem,4.4vw,4.75rem)]">
                     Mercafarma S.A.
                   </h3>
                 </div>
@@ -319,13 +327,13 @@ export function CrmShell() {
                       imageRefs.current[1] = element;
                     }}
                     aria-hidden="true"
-                    className="h-48 bg-cover bg-center grayscale contrast-125 transition-transform duration-700 ease-out group-hover:scale-105 md:h-full"
+                    className="h-48 bg-cover bg-center grayscale contrast-125 transition-transform duration-700 ease-out group-hover:scale-105 xl:h-full"
                     style={{ backgroundImage: backgroundImage("company-core") }}
                   />
                 </div>
               </div>
 
-              <div className="grid gap-0 md:grid-cols-3 md:gap-5">
+              <div className="grid gap-0 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
                 {crmCompanyFacts.map((item) => (
                   <FactCard key={item.label} {...item} />
                 ))}
@@ -333,36 +341,43 @@ export function CrmShell() {
             </div>
           </article>
 
-          <article className="bg-white p-5 md:col-span-5 md:p-7">
+          <article className="min-w-0 bg-white p-5 lg:col-span-5 lg:p-7">
             <div className="flex h-full flex-col justify-between gap-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-[#74776F]">Proyectos</p>
+              <div className="flex min-w-0 items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-[#74776F]">
+                    {copy.shell.projects}
+                  </p>
                   <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                    Operación activa
+                    {copy.shell.operationActive}
                   </h3>
                 </div>
-                <Tooltip content="Cada proyecto conserva estado, progreso y acceso al flujo de lotes." />
+                <Tooltip content={copy.shell.projectTooltip} />
               </div>
               <ProjectAccordion />
             </div>
           </article>
 
-          <article className="bg-[#FBFAF7] p-5 md:col-span-5 md:p-7">
-            <div className="grid h-full gap-5 sm:grid-cols-2">
-              <div>
-                <p className="text-sm font-medium text-[#74776F]">Acciones</p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                  Siguiente paso claro.
+          <article className="min-w-0 bg-[#FBFAF7] p-5 lg:col-span-5 lg:p-7">
+            <div className="grid h-full gap-5 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-[#74776F]">
+                  {copy.shell.actions}
+                </p>
+                <h3 className="mt-2 break-words text-2xl font-semibold tracking-tight">
+                  {copy.shell.action}
                 </h3>
               </div>
               <div className="space-y-2">
                 {crmQuickActions.slice(0, 3).map((item) => (
                   <div
                     key={item.label}
-                    className="group flex items-center justify-between gap-3 rounded-lg border border-[#E5E1D8] bg-white px-3 py-3 text-sm font-medium text-[#111111] transition-colors hover:border-[#111111]"
+                    className="group flex min-w-0 items-center justify-between gap-3 rounded-lg border border-[#E5E1D8] bg-white px-3 py-3 text-sm font-medium text-[#111111] transition-colors hover:border-[#111111]"
                   >
-                    <Link href={item.href} className="transition-colors hover:text-[#5E625C]">
+                    <Link
+                      href={item.href}
+                      className="min-w-0 break-words transition-colors hover:text-[#5E625C]"
+                    >
                       {item.label}
                     </Link>
                     <Tooltip content={item.description} />
@@ -385,7 +400,7 @@ export function CrmShell() {
             tooltip="El texto largo aparece solo cuando el usuario pide contexto."
           />
           <p className="mt-8 max-w-xl text-xl leading-9 text-[#343831] md:text-2xl">
-            <SplitWords text="La sesión vive segura, los proyectos se leen rápido y cada cambio de estado mantiene el flujo operativo sin ruido visual." />
+            <SplitWords text={copy.shell.desireText} />
           </p>
         </div>
 
@@ -398,11 +413,11 @@ export function CrmShell() {
               <div className="grid gap-px bg-[#E5E1D8] md:grid-cols-[1fr_0.78fr]">
                 <div className="bg-[#FBFAF7] p-5 md:p-7">
                   <div className="flex items-start justify-between gap-4">
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-sm font-medium text-[#74776F]">
                         {card.metric}
                       </p>
-                      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#111111] md:text-3xl">
+                        <h3 className="mt-2 break-words text-2xl font-semibold tracking-tight text-[#111111] md:text-3xl">
                         {card.title}
                       </h3>
                     </div>
@@ -437,13 +452,13 @@ export function CrmShell() {
         className="mx-auto w-full max-w-7xl py-24 md:py-36"
       >
         <SectionHeading
-          title="Configuración visible cuando importa."
-          description="Catálogos y señales se muestran compactos; los matices quedan en ayuda contextual."
+          title={copy.shell.settingsVisible}
+          description={copy.shell.catalogHint}
         />
 
         <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-[#E5E1D8] bg-[#E5E1D8] md:grid-cols-2">
-          <div className="bg-[#FBFAF7] p-5 md:p-7">
-            <p className="text-sm font-medium text-[#74776F]">Catálogos</p>
+                <div className="min-w-0 bg-[#FBFAF7] p-5 md:p-7">
+            <p className="text-sm font-medium text-[#74776F]">{copy.shell.catalogs}</p>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               {crmCatalogs.map((item) => (
                 <div
@@ -451,7 +466,7 @@ export function CrmShell() {
                   className="rounded-xl border border-[#E5E1D8] bg-white p-4"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-sm text-[#5E625C]">{item.label}</p>
                       <p className="mt-1 text-xl font-semibold text-[#111111]">
                         {item.value}
@@ -465,7 +480,9 @@ export function CrmShell() {
           </div>
 
           <div className="bg-white p-5 md:p-7">
-            <p className="text-sm font-medium text-[#74776F]">Señales diarias</p>
+            <p className="text-sm font-medium text-[#74776F]">
+              {copy.shell.dailySignals}
+            </p>
             <div className="mt-5 space-y-1">
               {crmDailySignals.map((item) => (
                 <FactCard key={item.label} {...item} />
@@ -478,39 +495,39 @@ export function CrmShell() {
           <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <h2 className="max-w-4xl text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
-                La UI ya está lista para conectar datos reales.
+                {copy.shell.connectedTitle}
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-white/70">
-                Landing separada, CRM claro y ayudas breves para no saturar la vista.
+                {copy.shell.connectedCta}
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <ShellButton href="#resumen" variant="secondary">
-                Volver arriba
+                {copy.actions.backTop}
               </ShellButton>
               <ShellButton href="/app/admin" variant="secondary">
-                Ir a admin
+                {copy.config.primary}
               </ShellButton>
             </div>
           </div>
         </div>
       </section>
 
-      <CrmOperationsWorkspace />
+      <CrmOperationsWorkspace locale={locale} />
 
       <section className="mx-auto w-full max-w-7xl pb-20">
         <div className="flex items-center justify-between gap-3">
           <button
             type="button"
             onClick={() => scrollTestimonialRail(-1)}
-            className="rounded-md border border-[#D8D2C8] bg-[#FBFAF7] px-4 py-2 text-sm font-semibold text-[#111111] transition-colors hover:border-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
+              className="rounded-md border border-[#D8D2C8] bg-[#FBFAF7] px-4 py-2 text-sm font-semibold !text-[#111111] transition-colors hover:border-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0] [&_*]:!text-[#111111]"
           >
             Anterior
           </button>
           <button
             type="button"
             onClick={() => scrollTestimonialRail(1)}
-            className="rounded-md border border-[#D8D2C8] bg-[#FBFAF7] px-4 py-2 text-sm font-semibold text-[#111111] transition-colors hover:border-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0]"
+              className="rounded-md border border-[#D8D2C8] bg-[#FBFAF7] px-4 py-2 text-sm font-semibold !text-[#111111] transition-colors hover:border-[#111111] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C7DA0] [&_*]:!text-[#111111]"
           >
             Siguiente
           </button>
@@ -550,16 +567,16 @@ export function CrmShell() {
           <p>CRM · Real Estate App Template</p>
           <div className="flex flex-wrap gap-4">
             <Link className="transition-colors hover:text-[#111111]" href="#resumen">
-              Panel
+              {copy.nav.links.resumen}
             </Link>
             <Link className="transition-colors hover:text-[#111111]" href="#empresa">
-              Empresa
+              {copy.nav.links.empresa}
             </Link>
             <Link className="transition-colors hover:text-[#111111]" href="#lotes">
-              Lotes
+              {copy.nav.links.lotes}
             </Link>
             <Link className="transition-colors hover:text-[#111111]" href="/es">
-              Landing
+              {copy.shell.backLanding}
             </Link>
           </div>
         </div>

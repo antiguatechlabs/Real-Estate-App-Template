@@ -17,8 +17,8 @@ export function FeaturedAgents({ agents }: FeaturedAgentsProps) {
       className="scroll-mt-24 bg-[#EFE8DD]/70 px-4 py-20 md:px-6 md:py-32"
     >
       <div className="mx-auto max-w-5xl">
-        <div className="mb-12 flex max-w-3xl items-start gap-3">
-          <div>
+        <div className="mb-12 flex min-w-0 max-w-3xl items-start gap-3">
+          <div className="min-w-0">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.28em] text-[#2C7DA0]">
             {t("eyebrow")}
           </p>
@@ -45,15 +45,15 @@ export function FeaturedAgents({ agents }: FeaturedAgentsProps) {
                 </div>
 
                 <div>
-                  <p className="text-lg font-semibold tracking-tight text-[#12344D]">
+                  <p className="break-words text-lg font-semibold tracking-tight text-[#12344D]">
                     {agent.name}
                   </p>
-                  <p className="mt-1 text-sm text-[#4B5563]">
+                  <p className="mt-1 break-words text-sm text-[#4B5563]">
                     {t(`specialties.${agent.specialtyKey}`)}
                   </p>
                 </div>
 
-                <div className="mx-auto inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F7F3EC] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#2C7DA0]">
+                <div className="mx-auto inline-flex max-w-full items-center rounded-md border border-[#E5E7EB] bg-[#F7F3EC] px-3 py-1 text-center text-xs font-semibold uppercase tracking-[0.14em] text-[#2C7DA0]">
                   {t("activeListings", { count: agent.listings })}
                 </div>
 

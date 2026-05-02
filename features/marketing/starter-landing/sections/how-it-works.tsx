@@ -26,13 +26,13 @@ export function HowItWorks() {
           {steps.map((step, index) => (
             <div
               key={step}
-              className="relative flex items-start justify-between gap-4 bg-white p-6"
+              className="relative flex min-w-0 items-start justify-between gap-4 bg-white p-6"
             >
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#4B5563]">
                   {String(index + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-3 text-lg font-semibold text-[#12344D]">
+                <h3 className="mt-3 break-words text-lg font-semibold text-[#12344D]">
                   {t(`steps.${step}.title`)}
                 </h3>
               </div>
