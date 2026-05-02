@@ -12,8 +12,8 @@ export function Hero({ brand }: HeroProps) {
   const t = useTranslations("marketingStarterLanding.hero");
 
   return (
-    <section className="relative overflow-hidden bg-[#F7F3EC] px-4 pb-20 pt-28 md:px-6 md:pb-28 md:pt-32">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,163,115,0.10),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(44,125,160,0.08),transparent_28%)]" />
+    <section className="relative overflow-hidden bg-[#F7F3EC] px-6 pb-20 pt-28 md:pb-28 md:pt-32">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,163,115,0.16),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(44,125,160,0.12),transparent_28%)]" />
       <div
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#12344D]/20 to-transparent"
         aria-hidden="true"
@@ -21,7 +21,8 @@ export function Hero({ brand }: HeroProps) {
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="max-w-3xl">
-          <p className="mb-5 text-sm font-medium text-[#4B5563]">
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#D4A373]/30 bg-white px-4 py-2 text-sm font-medium text-[#12344D] shadow-sm">
+            <span className="h-2 w-2 rounded-full bg-[#D4A373]" aria-hidden="true" />
             {t("eyebrow", { city: brand.city })}
           </p>
 
@@ -110,7 +111,7 @@ export function Hero({ brand }: HeroProps) {
           </div>
         </div>
 
-        <div className="relative min-h-[420px] overflow-hidden rounded-2xl border border-white/70 bg-[#12344D] md:min-h-[520px]">
+        <div className="relative min-h-[520px] overflow-hidden rounded-[36px] border border-white/70 bg-[#12344D] shadow-[0_28px_90px_rgba(18,52,77,0.28)]">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -124,18 +125,24 @@ export function Hero({ brand }: HeroProps) {
 
           <div className="absolute inset-0 p-6 sm:p-8">
             <div className="flex h-full flex-col justify-between">
-              <div className="max-w-xs rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-md">
+              <div className="max-w-xs rounded-3xl border border-white/15 bg-white/10 p-4 backdrop-blur-md">
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
                   {brand.agencyName}
                 </p>
+                <p className="mt-2 text-sm leading-relaxed text-white/80">
+                  Premium residences selected for clarity, trust, and visual calm.
+                </p>
               </div>
 
-              <div className="ml-auto max-w-sm rounded-xl border border-white/15 bg-[#F7F3EC]/95 p-4 backdrop-blur-sm">
+              <div className="ml-auto max-w-sm rounded-[28px] border border-white/15 bg-[#F7F3EC]/95 p-4 shadow-[0_20px_60px_rgba(18,52,77,0.18)] backdrop-blur-sm">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2C7DA0]">
                   {t("popularLabel")}
                 </p>
                 <p className="mt-2 text-sm font-semibold text-[#12344D]">
                   {brand.popularAreas.slice(0, 3).join(" · ")}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-[#4B5563]">
+                  Bright interiors, premium materials, and a calm buying experience.
                 </p>
               </div>
             </div>
