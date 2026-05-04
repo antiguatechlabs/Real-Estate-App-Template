@@ -251,8 +251,31 @@ features/crm/
   components/
     crm-shell.tsx
     crm-operations-workspace.tsx
-    crm-subpage-frame.tsx
-    crm-locale-switcher.tsx
+    crm-shell-top-nav.tsx
+    crm-shell-hero.tsx
+    crm-shell-footer.tsx
+    crm-shell-controls.tsx
+    crm-company-summary.tsx
+    crm-company-header.tsx
+    crm-company-metrics.tsx
+    crm-company-metric-card.tsx
+    crm-project-panel.tsx
+    crm-project-selector.tsx
+    crm-integration-status.tsx
+    crm-catalogs-summary.tsx
+    crm-lots-toolbar.tsx
+    crm-lots-table.tsx
+    crm-lots-table-desktop.tsx
+    crm-lots-table-mobile.tsx
+    crm-lots-table-row-actions.tsx
+    crm-create-lot-form.tsx
+    crm-import-panel.tsx
+    crm-import-header.tsx
+    crm-import-actions.tsx
+    crm-import-dropzone.tsx
+    crm-import-validation.tsx
+    crm-import-footer.tsx
+    crm-operations-primitives.tsx
   data/
     crm-content.ts
     crm-api-fallback.ts
@@ -260,6 +283,8 @@ features/crm/
     use-crm-data.ts
   lib/
     crm-locale.ts
+    crm-errors.ts
+    crm-lot-utils.ts
   services/
     bff-client.ts
   types/
@@ -270,24 +295,15 @@ Patron esperado:
 
 - `app/app/page.tsx` resuelve lo minimo necesario para la ruta y renderiza `CrmShell`.
 - `CrmShell` orquesta la experiencia principal del CRM.
-- `crm-operations-workspace.tsx` concentra la pantalla operativa.
+- `crm-operations-workspace.tsx` concentra el estado y la orquestacion del workspace.
+- `crm-shell-top-nav.tsx`, `crm-shell-hero.tsx` y `crm-shell-footer.tsx` separan la superficie de entrada.
+- `crm-company-summary.tsx`, `crm-project-panel.tsx`, `crm-lots-toolbar.tsx`, `crm-lots-table.tsx`, `crm-create-lot-form.tsx` e `crm-import-panel.tsx` separan los bloques operativos.
 - `use-crm-data.ts` encapsula React Query y mutaciones.
 - `bff-client.ts` encapsula llamadas al BFF.
 - `types/api.ts` mantiene los contratos del CRM.
+- `crm-errors.ts` y `crm-lot-utils.ts` concentran helpers puros reutilizados por varios paneles.
 
-Si el CRM sigue creciendo, dividir `crm-operations-workspace.tsx` en componentes mas pequenos dentro de `features/crm/components/`, por ejemplo:
-
-```text
-features/crm/components/
-  CompanySummary.tsx
-  CreateLotForm.tsx
-  ImportPanel.tsx
-  KpiGrid.tsx
-  LotsTable.tsx
-  ProjectPanel.tsx
-```
-
-No promover estos componentes a `components/shared/` hasta que otra feature tambien los necesite.
+Si el CRM sigue creciendo, seguir el mismo criterio: primero extraer subcomponentes locales dentro de `features/crm/components/`, y solo subir algo a `components/shared/` cuando otra feature lo necesite de forma real.
 
 ## Ejemplo aplicado a la landing actual
 
@@ -352,6 +368,7 @@ export type { Property } from "./types/property.types";
 - Preferir que la ruta prepare datos server-side y delegue interactividad a componentes cliente pequenos.
 - Evitar `Date.now()`, `Math.random()`, formato dependiente de locale o checks de `window` durante el render SSR si pueden causar hydration mismatch.
 - Mantener `app/providers.tsx` como punto central de providers globales.
+- El caso de estudio para este repo es que las rutas se mantengan delgadas y el trabajo visual viva en features, no en `app/`.
 
 ## Checklist antes de mover o crear componentes
 

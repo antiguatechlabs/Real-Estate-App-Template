@@ -18,6 +18,7 @@
 - Tabla responsive de lotes con acciones por fila [x]
 - Crear lote dentro del workspace [x]
 - Importacion con validacion, carga final y errores por fila [x]
+- Componentizacion granular del CRM [x]
 - Ajuste visual minimalist-ui y tipografia editorial [x]
 - QA lint, typecheck y build [x]
 - QA visual responsive en navegador [ ]
@@ -108,7 +109,9 @@ Este plan reemplaza la direccion de landing operativa por un workspace CRM de un
 ## Estado actual
 La base del CRM ya esta montada en el repo:
 - `app/app/page.tsx` renderiza el shell del CRM
-- `features/crm/components/crm-shell.tsx` contiene la experiencia visual principal, ahora revisada hacia una UI minimalista mobile-first
+- `features/crm/components/crm-shell.tsx` contiene la experiencia visual principal y orquesta top nav, hero y footer
+- `features/crm/components/crm-operations-workspace.tsx` coordina estado, queries y acciones del workspace
+- el workspace operativo ya esta partido en paneles y subcomponentes pequenos: company, projects, lots, import y primitives locales
 - `features/crm/data/crm-content.ts` contiene el contenido local de soporte
 - `app/app/layout.tsx` prepara la capa tipografica y de layout para `/app`
 - la estructura de carpetas escalable ya existe en `components/`, `hooks/`, `lib/`, `types/` y `features/crm/*`
@@ -129,7 +132,8 @@ La UI, el BFF tenant-aware, los servicios tipados, los hooks de React Query y el
 | --- | --- | --- | --- | --- | --- | --- |
 | Arquitectura de carpetas | `components/`, `hooks/`, `lib/`, `types/`, `features/crm/` | Hecho | Alta | Por asignar | 2026-05-01 | Base preparada para escalar sin mezclar dominios |
 | Separacion landing / CRM | `app/(marketing)/[locale]` / `app/app` | Hecho | Alta | Por asignar | 2026-05-01 | La landing queda aislada del CRM |
-| UI shell CRM | `app/app/page.tsx`, `app/app/layout.tsx`, `features/crm/components/crm-shell.tsx` | Revision minimalista aplicada | Alta | Por asignar | 2026-05-01 | Hero reducido, bento claro, tooltips y motion sobrio; marquee y dark dashboard eliminados |
+| UI shell CRM | `app/app/page.tsx`, `app/app/layout.tsx`, `features/crm/components/crm-shell.tsx` | Revision minimalista aplicada | Alta | Por asignar | 2026-05-04 | Hero reducido, bento claro, tooltips y motion sobrio; shell ya dividido en top nav, hero y footer |
+| Componentizacion granular CRM | `features/crm/components/crm-*`, `features/crm/lib/crm-*` | Hecho | Media | Por asignar | 2026-05-04 | Workspace, proyecto, lotes, importacion y KPI separados en piezas locales mas pequenas |
 | Base de contenido CRM | `features/crm/data/crm-content.ts` | Hecho | Media | Por asignar | 2026-05-01 | Contenido local para la primera iteracion visual |
 | Tooltip UI primitive | `components/ui/tooltip.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Ayuda contextual accesible sin dependencia nueva |
 | GitHub Pages | `.github/workflows/*`, `scripts/export-gh-pages.cjs`, `next.config.ts`, `package.json` | Hecho | Alta | Por asignar | 2026-05-01 | Eliminado porque ya no se usara |
@@ -139,7 +143,7 @@ La UI, el BFF tenant-aware, los servicios tipados, los hooks de React Query y el
 | Catalogs | `features/crm/services/**`, `features/crm/types/**` | Hecho | Media | Por asignar | 2026-05-01 | Estados principales agregados desde endpoints de catalogos |
 | Lots CRUD | `features/crm/services/**`, `features/crm/hooks/**`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Crear, editar, borrar, cambiar estado, hold y release conectados por servicio/hook |
 | Importacion de lots | `features/crm/services/**`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Alta | Por asignar | 2026-05-01 | Descarga de template, validacion e importacion conectadas al BFF |
-| QA visual | `features/crm/components/crm-shell.tsx`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Media | Por asignar | 2026-05-01 | Responsive, scroll motion sobrio y densidad visual verificados por build |
+| QA visual | `features/crm/components/crm-shell.tsx`, `features/crm/components/crm-operations-workspace.tsx` | Hecho | Media | Por asignar | 2026-05-04 | Responsive, scroll motion sobrio y densidad visual verificados por build |
 | Docs de arquitectura | `docs/architecture.md` | Hecho | Media | Por asignar | 2026-05-01 | Estructura y responsabilidades alineadas |
 
 ## Fases de implementacion
@@ -258,6 +262,7 @@ Criterios de cierre:
 ## Checklist tecnico
 - [x] Aislar landing y CRM en rutas separadas
 - [x] Crear estructura escalable de carpetas
+- [x] Partir CRM shell y workspace en componentes locales pequenos
 - [x] Mover la UI principal del CRM a `features/crm`
 - [x] Aplicar refactor minimalista mobile-first al CRM
 - [x] Crear primitive de tooltip accesible sin dependencia nueva

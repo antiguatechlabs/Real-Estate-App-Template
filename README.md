@@ -40,6 +40,7 @@ Esta plantilla reúne los cimientos para piezas digitales del ecosistema inmobil
 ## Recursos y documentación
 - [docs/context.md](docs/context.md)
 - [docs/architecture.md](docs/architecture.md)
+- [docs/componentization-guide.md](docs/componentization-guide.md)
 - [AGENTS.md](/Users/mersis12/Documents/GitHub/Real-Estate-App-Template/AGENTS.md)
 
 Usa este repositorio como plantilla base y adapta la BFF, la app o la landing page según el nuevo cliente que estés construyendo.

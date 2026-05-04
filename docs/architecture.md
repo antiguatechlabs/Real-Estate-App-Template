@@ -22,6 +22,9 @@ app/
   not-found.tsx
   page.tsx
   providers.tsx
+components/
+  ui/
+  shared/
 features/
   crm/
     components/
@@ -32,6 +35,9 @@ features/
     types/
   marketing/
 i18n/
+lib/
+hooks/
+types/
 messages/
 ```
 
@@ -102,6 +108,7 @@ docs/
 
 - `components/ui/` for reusable low-level UI primitives.
 - `components/shared/` for cross-feature composed components used in multiple modules.
+- Keep these folders feature-agnostic. If a component knows about CRM or landing copy, it belongs in `features/`.
 
 ### `components/ui/`
 
@@ -121,7 +128,8 @@ docs/
 ### `features/crm/`
 
 - CRM domain code should stay here.
-- Keep presentational building blocks in `components/` and local mock/data contracts in `data/`.
+- Keep the route-facing orchestrators in `components/` and local mock/data contracts in `data/`.
+- The current CRM is intentionally split into small pieces such as `crm-shell-top-nav`, `crm-shell-hero`, `crm-company-summary`, `crm-project-panel`, `crm-lots-table`, `crm-import-panel`, and the supporting local primitives/helpers they compose.
 - Use `hooks/` for CRM-only client hooks, `lib/` for local pure helpers, `services/` for CRM API/BFF adapters, and `types/` for CRM-only contracts.
 - Add feature-specific hooks or API adapters here before promoting anything to `lib/`.
 
@@ -163,6 +171,7 @@ docs/
 - Keep export-related logic for `xlsx`, `jspdf`, and `jspdf-autotable` isolated in dedicated modules instead of embedding it directly inside page files.
 - Keep `react-calendar` usage inside clear calendar or scheduling components instead of route-level JSX when possible.
 - Configure `CRM_API_BASE_URL` for the Laravel backend and optionally `CRM_TENANT_CODE`; the client must consume Laravel through `/api/bff/**`, not directly.
+- Prefer small feature-local components once a file starts mixing orchestration, layout, and repeated UI patterns. The CRM workspace is the reference implementation for that split.
 
 ## Change management
 
