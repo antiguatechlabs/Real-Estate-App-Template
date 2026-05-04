@@ -3,8 +3,6 @@
 ## Mini tracker
 - Arquitectura de carpetas [x]
 - Separacion landing / CRM [x]
-- UI shell de `/app` [x]
-- Revision minimalista mobile-first [x]
 - Eliminacion de GitHub Pages [x]
 - Base de `features/crm` [x]
 - BFF auth/session [x]
@@ -12,7 +10,17 @@
 - Catalogs [x]
 - Lots CRUD [x]
 - Importacion de lots [x]
-- QA y cierre [x]
+- Base UI CRM actual [x]
+- Nuevo workspace CRM segun mockup [x]
+- Top nav + hero operativo compacto [x]
+- Resumen empresa + KPIs [x]
+- Layout 3 columnas: proyecto, lotes, importacion [x]
+- Tabla responsive de lotes con acciones por fila [x]
+- Crear lote dentro del workspace [x]
+- Importacion con validacion, carga final y errores por fila [x]
+- Ajuste visual minimalist-ui y tipografia editorial [x]
+- QA lint, typecheck y build [x]
+- QA visual responsive en navegador [ ]
 
 ## Objetivo
 Centralizar el seguimiento de la implementacion del CRM interno que vive bajo `/app`, sin tocar la landing publica localizada bajo `app/(marketing)/[locale]`.
@@ -33,6 +41,69 @@ Alcance confirmado:
 
 Fuera de alcance por ahora:
 - leads, deals, reservations, sales, financing, tasks y notifications, salvo que aparezcan como endpoints reales y necesarios para el MVP
+
+## Plan actual: rediseño CRM operations
+
+Este plan reemplaza la direccion de landing operativa por un workspace CRM de una sola pantalla, basado en el nuevo mockup de Control Hub. El objetivo es reducir texto narrativo y concentrar la operacion diaria en lotes, estado de empresa, proyecto activo, busqueda, acciones e importacion.
+
+### 1. Alcance de implementacion
+- Mantener la ruta interna `/app`.
+- No tocar la landing publica localizada bajo `app/(marketing)/[locale]`.
+- Tratar el panel derecho del mockup como guia de diseño, no como UI final dentro del producto.
+- Mantener el dominio CRM dentro de `features/crm/`.
+- Reusar BFF, hooks, servicios, tipos y fallback local ya existentes.
+
+### 2. Direccion visual
+- Usar una interfaz utilitaria, clara y compacta, no una landing con secciones largas.
+- Aplicar fondo calido `#F7F6F2` / `#FBFAF7`, superficies blancas y bordes finos `#E5E1D8`.
+- Mantener botones primarios negros `#111111`, sin sombras pesadas ni gradientes.
+- Usar serif editorial para hero/titulos grandes y sans sobria para UI, siguiendo `minimalist-ui`.
+- Usar color solo para estados: activo, disponible, bloqueado, error, importacion completada.
+- Evitar emojis, copy generico, cards anidadas, gradientes fuertes y efectos decorativos.
+
+### 3. Nueva estructura de UI
+- `CrmControlHub`: contenedor principal del nuevo workspace.
+- `CrmTopNav`: logo, tenant, navegacion, idioma, settings y CTA de lotes.
+- `CrmHero`: titulo corto, acciones principales, imagen desaturada y badges de sesion/BFF.
+- `CompanySummary`: empresa, estado operativo, moneda, zona horaria y nivel de acceso.
+- `KpiGrid`: lotes disponibles, lotes bloqueados, proyectos activos y API conectada.
+- `CrmWorkspace`: layout principal de tres columnas.
+- `ProjectPanel`: selector de proyecto, integracion CRM/BFF y resumen de catalogos.
+- `LotsTable`: busqueda, filtro por estado, tabla desktop y version card en mobile.
+- `CreateLotForm`: creacion rapida dentro del workspace.
+- `ImportPanel`: descarga de plantilla, validacion, importacion final y errores por fila.
+
+### 4. Datos y comportamiento
+- Reusar `useCrmOverview`, `useCrmLots` y `useCrmMutations`.
+- Crear helpers puros en `features/crm/lib/` para derivar metricas desde `lots`, `projects`, `catalogs` y errores de API.
+- Mapear columnas de lotes desde el contrato actual: `name`, `base_price`, `fields.AREA_M2`, `fields.STATUS` y campos dinamicos.
+- Mantener fallback local cuando `CRM_API_BASE_URL` no este configurado.
+- Completar el flujo de importacion: validar archivo, mostrar resultado, permitir importar cuando `can_import` sea true y listar errores accionables.
+- Mantener acciones por fila para bloquear, liberar y preparar cambio de estado sin sacar al usuario del workspace.
+
+### 5. Responsive y UX
+- Desktop: layout `260px / 1fr / 280-320px` para proyecto, lotes e importacion.
+- Tablet: proyecto + tabla primero, importacion debajo.
+- Mobile: una columna, tabla convertida a cards y sin scroll horizontal.
+- Formularios con labels visibles, no solo placeholders.
+- Estados loading, disabled, success y error visibles en mutaciones.
+- Targets interactivos minimo 44px, focus states claros y contraste WCAG AA.
+- Reducir o eliminar GSAP/ScrollTrigger en esta pantalla; el workspace debe sentirse estable y operativo.
+
+### 6. Archivos esperados
+- `features/crm/components/crm-shell.tsx`
+- `features/crm/components/crm-operations-workspace.tsx`
+- `features/crm/lib/crm-locale.ts`
+- `features/crm/lib/*` para helpers de metricas/formato si aplica
+- `features/crm/data/crm-api-fallback.ts` si se necesitan datos fallback mas cercanos al mockup
+- `docs/crm-implementation-tracker.md`
+
+### 7. Validacion de cierre
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- Revision visual de `/app` en desktop, tablet y mobile.
+- Confirmar que el workspace funciona con fallback local y con BFF configurado.
 
 ## Estado actual
 La base del CRM ya esta montada en el repo:
